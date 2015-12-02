@@ -677,7 +677,7 @@ module.exports = BeerRecipe = React.createClass({displayName: "BeerRecipe",
               id: "name", 
               type: "text", 
               valueLink: this.linkState('name'), 
-              placeholder: "Name your recipie"})
+              placeholder: "Name your recipe"})
             ), 
             
             React.createElement("div", {className: "form-group"}, 
@@ -686,7 +686,7 @@ module.exports = BeerRecipe = React.createClass({displayName: "BeerRecipe",
               id: "style", 
               type: "text", 
               valueLink: this.linkState('style'), 
-              placeholder: "Enter your recipie's style"})
+              placeholder: "Enter your recipe's style"})
             ), 
             React.createElement("div", {className: "form-group"}, 
               React.createElement("label", {htmlFor: 'type'}, "Type"), 
@@ -694,7 +694,7 @@ module.exports = BeerRecipe = React.createClass({displayName: "BeerRecipe",
               id: "type", 
               type: "text", 
               valueLink: this.linkState('type'), 
-              placeholder: "Enter your recipie's type"})
+              placeholder: "Enter your recipe's type"})
             )
           )
 
@@ -896,10 +896,10 @@ var React = require('react');
 module.exports = Errors = React.createClass({displayName: "Errors",
 
   _renderErrors: function() {
+        // Generate errors list based on props.errors
     return (
       React.createElement("div", {className: "errors"}, 
         React.createElement("ul", null, 
-        "// Generate errors list based on props.errors", 
           this.props.errors.map(function(error){
             return (React.createElement("li", {key: error}, error));
           })

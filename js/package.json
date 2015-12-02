@@ -1,0 +1,24 @@
+{
+  "name": "beer_recipe_app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "dependencies": {
+    "extend": "^3.0.0",
+    "babelify": "^7.2.0",
+    "flux": "^2.1.1",
+    "babel-preset-react": "^6.1.18",
+    "history": "^1.13.1",
+    "react-addons-linked-state-mixin": "^0.14.3",
+    "react": "^0.14.3",
+    "react-dom": "^0.14.3",
+    "reactify": "^1.1.1",
+    "react-router": "^1.0.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}

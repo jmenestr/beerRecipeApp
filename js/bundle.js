@@ -3,8 +3,9 @@ var AppDispatcher = require('../dispatcher/dispatcher');
 var constants = require('../constants/ingredient_constants');
 var ingredients = require('./database');
 
+
 module.exports = {
-  recieveIngredients: function (type) {
+  recieveIngredients: function(type) {
     var payload;
     switch (type) {
       case 'hops':
@@ -19,84 +20,565 @@ module.exports = {
       case 'fermentables':
         payload = ingredients.fermentables;
         break;
-      default:
+      default: 
         break;
     }
     var action = {
-      actionType: constants.INGREDIENTS_RECIEVED,
-      payload: payload
-    };
-    AppDispatcher.dispatch(action);
+        actionType: constants.INGREDIENTS_RECIEVED,
+        payload: payload
+      };
+      AppDispatcher.dispatch(action)
   },
 
-  searchIngredients: function (string) {
+  searchIngredients: function(string) {
     var action = {
-      actionType: constants.INGREDIENT_SEARCH,
-      payload: string
-    };
-    AppDispatcher.dispatch(action);
+        actionType: constants.INGREDIENT_SEARCH,
+        payload: string
+      };
+      AppDispatcher.dispatch(action)
   }
 
-};
+}
 
 },{"../constants/ingredient_constants":11,"../dispatcher/dispatcher":12,"./database":2}],2:[function(require,module,exports){
 
-// Simulate Database JSON API responses with parsed JS objects in the format I would
+// Simulate Database JSON API responses with parsed JS objects in the format I would 
 // generally expect a server to respond with (of course that would depend on the paricular data represented)
-//
+// 
 // For the basic example of this App, I assume all ingredients have a name, amount, and unit
 // It would be easy to generalize this to different details for each ingredient in the general case
-var hops = [{ name: "Hop1", amount: 0, unit: 'lb' }, { name: "Hop2", amount: 0, unit: 'lb' }, { name: "Hop3", amount: 0, unit: 'lb' }, { name: "Hop4", amount: 0, unit: 'lb' }, { name: "Hop5", amount: 0, unit: 'lb' }, { name: "Hop6", amount: 0, unit: 'lb' }, { name: "Hop7", amount: 0, unit: 'lb' }, { name: "Hop8", amount: 0, unit: 'lb' }];
+var hops = [
+{name: "Ahtanum", amount: 0, unit: 'lb'}, 
+{name: "Amarillo", amount: 0, unit: 'lb'},
+{name: "Cascade", amount: 0, unit: 'lb'},
+{name: "Centennial", amount: 0, unit: 'lb'},
+{name: "Chinook", amount: 0, unit: 'lb'},
+{name: "Columbus", amount: 0, unit: 'lb'},
+{name: "Cluster", amount: 0, unit: 'lb'},
+{name: "Crystal", amount: 0, unit: 'lb'},
+{name: "Fuggle", amount: 0, unit: 'lb'}, 
+{name: "Galena", amount: 0, unit: 'lb'},
+{name: "Golding", amount: 0, unit: 'lb'},
+{name: "Hallertau mf", amount: 0, unit: 'lb'},
+{name: "Horizon", amount: 0, unit: 'lb'},
+{name: "Liberty", amount: 0, unit: 'lb'},
+{name: "Magnum", amount: 0, unit: 'lb'},
+{name: "Northern Brewer", amount: 0, unit: 'lb'},
+{name: "Nugget", amount: 0, unit: 'lb'},
+{name: "Perle", amount: 0, unit: 'lb'},
+{name: "Saaz", amount: 0, unit: 'lb'},
+{name: "Satus", amount: 0, unit: 'lb'},
+{name: "Spalt Select", amount: 0, unit: 'lb'},
+{name: "Sterling", amount: 0, unit: 'lb'},
+{name: "Tettnang", amount: 0, unit: 'lb'},
+{name: "Tomahawk", amount: 0, unit: 'lb'},
+{name: "Ultra", amount: 0, unit: 'lb'},
+{name: "US Fuggle", amount: 0, unit: 'lb'},
+{name: "Vanguard", amount: 0, unit: 'lb'},
+{name: "Warrior", amount: 0, unit: 'lb'},
+{name: "Nugget", amount: 0, unit: 'lb'},
+{name: "Willamette", amount: 0, unit: 'lb'},
+];
 
-var yeast = [{ name: "Yeast1", amount: 0, unit: 'lb' }, { name: "Yeast2", amount: 0, unit: 'lb' }, { name: "Yeast3", amount: 0, unit: 'lb' }, { name: "Yeast4", amount: 0, unit: 'lb' }, { name: "Yeast5", amount: 0, unit: 'lb' }, { name: "Yeast6", amount: 0, unit: 'lb' }, { name: "Yeast7", amount: 0, unit: 'lb' }, { name: "Yeast8", amount: 0, unit: 'lb' }];
+var yeast = [ { name: 'California Ale Yeast®', amount: 0, unit: 'lb' },
+  { name: 'English Ale Yeast', amount: 0, unit: 'lb' },
+  { name: 'German Ale II', amount: 0, unit: 'lb' },
+  { name: 'Irish Ale Yeast', amount: 0, unit: 'lb' },
+  { name: 'British Ale Yeast', amount: 0, unit: 'lb' },
+  { name: 'Bedford British', amount: 0, unit: 'lb' },
+  { name: 'Dry English Ale Yeast', amount: 0, unit: 'lb' },
+  { name: 'East Coast Ale Yeast', amount: 0, unit: 'lb' },
+  { name: 'Australian Ale Yeast', amount: 0, unit: 'lb' },
+  { name: 'European Ale Yeast', amount: 0, unit: 'lb' },
+  { name: 'London Ale Yeast', amount: 0, unit: 'lb' },
+  { name: 'Whitbread Ale Yeast', amount: 0, unit: 'lb' },
+  { name: 'Essex Ale Yeast', amount: 0, unit: 'lb' },
+  { name: 'Burton Ale Yeast', amount: 0, unit: 'lb' },
+  { name: 'Edinburgh Scottish Ale Yeast', amount: 0, unit: 'lb' },
+  { name: 'German Ale/ Kölsch Yeast', amount: 0, unit: 'lb' },
+  { name: 'Dusseldorf Alt Yeast', amount: 0, unit: 'lb' },
+  { name: 'Yorkshire Square Ale Yeast', amount: 0, unit: 'lb' },
+  { name: 'East Midlands Ale Yeast', amount: 0, unit: 'lb' },
+  { name: 'Pacific Ale Yeast', amount: 0, unit: 'lb' },
+  { name: 'Scotch Whisky Yeast', amount: 0, unit: 'lb' },
+  { name: 'Tennessee Whiskey Yeast', amount: 0, unit: 'lb' },
+  { name: 'California Ale V Yeast', amount: 0, unit: 'lb' },
+  { name: 'American Ale Yeast Blend', amount: 0, unit: 'lb' },
+  { name: 'American Whiskey Yeast', amount: 0, unit: 'lb' },
+  { name: 'Bourbon Yeast', amount: 0, unit: 'lb' },
+  { name: 'French Ale', amount: 0, unit: 'lb' },
+  { name: 'Neutral Grain Yeast', amount: 0, unit: 'lb' },
+  { name: 'Cream Ale Yeast Blend', amount: 0, unit: 'lb' },
+  { name: 'English Ale Blend', amount: 0, unit: 'lb' },
+  { name: 'San Diego Super Yeast', amount: 0, unit: 'lb' },
+  { name: 'Burlington Ale Yeast', amount: 0, unit: 'lb' },
+  { name: 'Super High Gravity Ale Yeast', amount: 0, unit: 'lb' },
+  { name: 'Hefeweizen Ale Yeast', amount: 0, unit: 'lb' },
+  { name: 'American Hefeweizen Ale Yeast', amount: 0, unit: 'lb' },
+  { name: 'Bavarian Weizen Yeast', amount: 0, unit: 'lb' },
+  { name: 'Hefeweizen IV Ale Yeast', amount: 0, unit: 'lb' },
+  { name: 'Belgian Wit Ale Yeast', amount: 0, unit: 'lb' },
+  { name: 'Belgian Wit II Ale Yeast', amount: 0, unit: 'lb' },
+  { name: 'Monastery Ale Yeast', amount: 0, unit: 'lb' },
+  { name: 'Bastogne Belgian Ale Yeast', amount: 0, unit: 'lb' },
+  { name: 'Antwerp Ale Yeast', amount: 0, unit: 'lb' },
+  { name: 'Abbey Ale Yeast', amount: 0, unit: 'lb' },
+  { name: 'Abbey IV Ale Yeast', amount: 0, unit: 'lb' },
+  { name: 'Belgian Strong Ale Yeast', amount: 0, unit: 'lb' },
+  { name: 'Belgian Ale Yeast', amount: 0, unit: 'lb' },
+  { name: 'Belgian Saison I Yeast', amount: 0, unit: 'lb' },
+  { name: 'Belgian Saison II Yeast', amount: 0, unit: 'lb' },
+  { name: 'Belgian Style Saison Ale Yeast Blend',
+    amount: 0,
+    unit: 'lb' },
+  { name: 'Belgian Golden Ale Yeast', amount: 0, unit: 'lb' },
+  { name: 'Belgian Style Ale Yeast Blend', amount: 0, unit: 'lb' },
+  { name: 'Belgian Saison III Yeast', amount: 0, unit: 'lb' },
+  { name: 'French Saison Ale Yeast', amount: 0, unit: 'lb' },
+  { name: 'Berliner Weisse Blend', amount: 0, unit: 'lb' },
+  { name: 'Saccharomyces Trois', amount: 0, unit: 'lb' },
+  { name: 'Brettanomyces claussenii', amount: 0, unit: 'lb' },
+  { name: 'Brettanomyces bruxellensis Trois Vrai',
+    amount: 0,
+    unit: 'lb' },
+  { name: 'Brettanomyces bruxellensis', amount: 0, unit: 'lb' },
+  { name: 'Brettanomyces lambicus', amount: 0, unit: 'lb' },
+  { name: 'Belgian Sour Mix 1', amount: 0, unit: 'lb' },
+  { name: 'Pediococcus damnosus', amount: 0, unit: 'lb' },
+  { name: 'Flemish Ale Blend', amount: 0, unit: 'lb' },
+  { name: 'American Farmhouse Blend', amount: 0, unit: 'lb' },
+  { name: 'Lactobacillus brevis', amount: 0, unit: 'lb' },
+  { name: 'Malolactic Cultures', amount: 0, unit: 'lb' },
+  { name: 'Lactobacillus delbrueckii Bacteria',
+    amount: 0,
+    unit: 'lb' },
+  { name: 'Flor Sherrry Yeast', amount: 0, unit: 'lb' },
+  { name: 'Sake Yeast', amount: 0, unit: 'lb' },
+  { name: 'California Pinot Noir Yeast', amount: 0, unit: 'lb' },
+  { name: 'Sake #9 Yeast', amount: 0, unit: 'lb' },
+  { name: 'Champagne Yeast', amount: 0, unit: 'lb' },
+  { name: 'Avize Wine Yeast', amount: 0, unit: 'lb' },
+  { name: 'Sweet Mead/Wine Yeast', amount: 0, unit: 'lb' },
+  { name: 'Steinberg-Geisenheim Wine Yeast',
+    amount: 0,
+    unit: 'lb' },
+  { name: 'Chardonnay White Wine Yeast', amount: 0, unit: 'lb' },
+  { name: 'French White Wine Yeast', amount: 0, unit: 'lb' },
+  { name: 'Merlot Red Wine Yeast', amount: 0, unit: 'lb' },
+  { name: 'Assmanshausen Wine Yeast', amount: 0, unit: 'lb' },
+  { name: 'French Red Wine Yeast', amount: 0, unit: 'lb' },
+  { name: 'Cabernet Red Wine Yeast', amount: 0, unit: 'lb' },
+  { name: 'Suremain Burgundy Wine Yeast', amount: 0, unit: 'lb' },
+  { name: 'English Cider Yeast', amount: 0, unit: 'lb' },
+  { name: 'Pilsner Lager Yeast', amount: 0, unit: 'lb' },
+  { name: 'Czech Budejovice Lager Yeast', amount: 0, unit: 'lb' },
+  { name: 'San Francisco Lager Yeast', amount: 0, unit: 'lb' },
+  { name: 'Oktoberfest/Märzen Lager Yeast', amount: 0, unit: 'lb' },
+  { name: 'German Lager Yeast', amount: 0, unit: 'lb' },
+  { name: 'German Bock Lager Yeast', amount: 0, unit: 'lb' },
+  { name: 'German Lager X', amount: 0, unit: 'lb' },
+  { name: 'Southern German Lager Yeast', amount: 0, unit: 'lb' },
+  { name: 'American Lager Yeast', amount: 0, unit: 'lb' },
+  { name: 'Munich Helles Yeast', amount: 0, unit: 'lb' },
+  { name: 'Cry Havoc', amount: 0, unit: 'lb' },
+  { name: 'Zurich Lager Yeast', amount: 0, unit: 'lb' },
+  { name: 'Old Bavarian Lager Yeast', amount: 0, unit: 'lb' },
+  { name: 'Mexican Lager Yeast', amount: 0, unit: 'lb' } ];
 
-var fermentables = [{ name: "Fermentable1", amount: 0, unit: 'lb' }, { name: "Fermentable2", amount: 0, unit: 'lb' }, { name: "Fermentable3", amount: 0, unit: 'lb' }, { name: "Fermentable4", amount: 0, unit: 'lb' }, { name: "Fermentable5", amount: 0, unit: 'lb' }, { name: "Fermentable6", amount: 0, unit: 'lb' }, { name: "Fermentable7", amount: 0, unit: 'lb' }, { name: "Fermentable8", amount: 0, unit: 'lb' }];
 
-var extras = [{ name: "Extra1", amount: 0, unit: 'lb' }, { name: "Extra2", amount: 0, unit: 'lb' }, { name: "Extra3", amount: 0, unit: 'lb' }, { name: "Extra4", amount: 0, unit: 'lb' }, { name: "Extra5", amount: 0, unit: 'lb' }, { name: "Extra6", amount: 0, unit: 'lb' }, { name: "Extra7", amount: 0, unit: 'lb' }, { name: "Extra8", amount: 0, unit: 'lb' }];
+var fermentables = [ { name: 'Fermentable', amount: 0, unit: 'lb' },
+  { name: 'Country', amount: 0, unit: 'lb' },
+  { name: 'Category', amount: 0, unit: 'lb' },
+  { name: 'Type', amount: 0, unit: 'lb' },
+  { name: 'Color', amount: 0, unit: 'lb' },
+  { name: 'PPG', amount: 0, unit: 'lb' },
+  { name: 'Recipes', amount: 0, unit: 'lb' },
+  { name: 'Abbey Malt', amount: 0, unit: 'lb' },
+  { name: 'Acidulated Malt', amount: 0, unit: 'lb' },
+  { name: 'Amber', amount: 0, unit: 'lb' },
+  { name: 'Apricot', amount: 0, unit: 'lb' },
+  { name: 'Aromatic', amount: 0, unit: 'lb' },
+  { name: 'Aromatic Malt', amount: 0, unit: 'lb' },
+  { name: 'Ashbourne Mild', amount: 0, unit: 'lb' },
+  { name: 'Banana', amount: 0, unit: 'lb' },
+  { name: 'Belgian Candi Sugar - Amber/Brown',
+    amount: 0,
+    unit: 'lb' },
+  { name: 'Belgian Candi Sugar - Clear/Blond',
+    amount: 0,
+    unit: 'lb' },
+  { name: 'Belgian Candi Sugar - Dark', amount: 0, unit: 'lb' },
+  { name: 'Belgian Candi Syrup - Amber', amount: 0, unit: 'lb' },
+  { name: 'Belgian Candi Syrup - Clear', amount: 0, unit: 'lb' },
+  { name: 'Belgian Candi Syrup - D2', amount: 0, unit: 'lb' },
+  { name: 'Belgian Candi Syrup - Dark', amount: 0, unit: 'lb' },
+  { name: 'Biscuit', amount: 0, unit: 'lb' },
+  { name: 'Black Barley', amount: 0, unit: 'lb' },
+  { name: 'Black Malt', amount: 0, unit: 'lb' },
+  { name: 'Black Malt', amount: 0, unit: 'lb' },
+  { name: 'Black Patent', amount: 0, unit: 'lb' },
+  { name: 'Blackprinz', amount: 0, unit: 'lb' },
+  { name: 'Blueberry', amount: 0, unit: 'lb' },
+  { name: 'Bohemian Pilsner', amount: 0, unit: 'lb' },
+  { name: 'Bonlander Munich', amount: 0, unit: 'lb' },
+  { name: 'Brown', amount: 0, unit: 'lb' },
+  { name: 'Brown Rice Syrup - Gluten Free', amount: 0, unit: 'lb' },
+  { name: 'Brown Sugar', amount: 0, unit: 'lb' },
+  { name: 'Buckwheat Malt - Gluten Free', amount: 0, unit: 'lb' },
+  { name: 'Cane Sugar', amount: 0, unit: 'lb' },
+  { name: 'Cara 20L', amount: 0, unit: 'lb' },
+  { name: 'Cara 45L', amount: 0, unit: 'lb' },
+  { name: 'Cara Malt', amount: 0, unit: 'lb' },
+  { name: 'Cara Pale', amount: 0, unit: 'lb' },
+  { name: 'Cara Plus 100', amount: 0, unit: 'lb' },
+  { name: 'Cara Plus 150', amount: 0, unit: 'lb' },
+  { name: 'Cara Plus 200', amount: 0, unit: 'lb' },
+  { name: 'Cara Plus 250', amount: 0, unit: 'lb' },
+  { name: 'CaraAmber', amount: 0, unit: 'lb' },
+  { name: 'CaraAroma', amount: 0, unit: 'lb' },
+  { name: 'CaraBelge', amount: 0, unit: 'lb' },
+  { name: 'CaraBohemian', amount: 0, unit: 'lb' },
+  { name: 'CaraBrown', amount: 0, unit: 'lb' },
+  { name: 'CaraCrystal Wheat Malt', amount: 0, unit: 'lb' },
+  { name: 'Carafa I', amount: 0, unit: 'lb' },
+  { name: 'Carafa II', amount: 0, unit: 'lb' },
+  { name: 'Carafa III', amount: 0, unit: 'lb' },
+  { name: 'CaraFoam', amount: 0, unit: 'lb' },
+  { name: 'CaraHell', amount: 0, unit: 'lb' },
+  { name: 'Caramel / Crystal 10L', amount: 0, unit: 'lb' },
+  { name: 'Caramel / Crystal 120L', amount: 0, unit: 'lb' },
+  { name: 'Caramel / Crystal 150L', amount: 0, unit: 'lb' },
+  { name: 'Caramel / Crystal 15L', amount: 0, unit: 'lb' },
+  { name: 'Caramel / Crystal 20L', amount: 0, unit: 'lb' },
+  { name: 'Caramel / Crystal 30L', amount: 0, unit: 'lb' },
+  { name: 'Caramel / Crystal 40L', amount: 0, unit: 'lb' },
+  { name: 'Caramel / Crystal 60L', amount: 0, unit: 'lb' },
+  { name: 'Caramel / Crystal 75L', amount: 0, unit: 'lb' },
+  { name: 'Caramel / Crystal 80L', amount: 0, unit: 'lb' },
+  { name: 'Caramel / Crystal 90L', amount: 0, unit: 'lb' },
+  { name: 'Caramel Pils', amount: 0, unit: 'lb' },
+  { name: 'Caramel Pils', amount: 0, unit: 'lb' },
+  { name: 'Caramel Wheat', amount: 0, unit: 'lb' },
+  { name: 'CaraMunich', amount: 0, unit: 'lb' },
+  { name: 'CaraMunich I', amount: 0, unit: 'lb' },
+  { name: 'CaraMunich II', amount: 0, unit: 'lb' },
+  { name: 'CaraMunich III', amount: 0, unit: 'lb' },
+  { name: 'Carapils', amount: 0, unit: 'lb' },
+  { name: 'Carapils (Dextrine Malt)', amount: 0, unit: 'lb' },
+  { name: 'CaraRed', amount: 0, unit: 'lb' },
+  { name: 'Carastan (30/37)', amount: 0, unit: 'lb' },
+  { name: 'Carastan Light (15L)', amount: 0, unit: 'lb' },
+  { name: 'CaraVienne', amount: 0, unit: 'lb' },
+  { name: 'Cherry', amount: 0, unit: 'lb' },
+  { name: 'Chocolate', amount: 0, unit: 'lb' },
+  { name: 'Chocolate', amount: 0, unit: 'lb' },
+  { name: 'Chocolate', amount: 0, unit: 'lb' },
+  { name: 'Chocolate Malt', amount: 0, unit: 'lb' },
+  { name: 'Chocolate Rye', amount: 0, unit: 'lb' },
+  { name: 'Chocolate Wheat', amount: 0, unit: 'lb' },
+  { name: 'Coffee Malt', amount: 0, unit: 'lb' },
+  { name: 'Cookie Malt', amount: 0, unit: 'lb' },
+  { name: 'Corn Sugar - Dextrose', amount: 0, unit: 'lb' },
+  { name: 'Corn Syrup', amount: 0, unit: 'lb' },
+  { name: 'Cranberry', amount: 0, unit: 'lb' },
+  { name: 'Crystal 10L Millet Malt - Gluten Free',
+    amount: 0,
+    unit: 'lb' },
+  { name: 'Crystal 140L', amount: 0, unit: 'lb' },
+  { name: 'Crystal 15L', amount: 0, unit: 'lb' },
+  { name: 'Crystal 30L', amount: 0, unit: 'lb' },
+  { name: 'Crystal 30L Millet Malt - Gluten Free',
+    amount: 0,
+    unit: 'lb' },
+  { name: 'Crystal 45L', amount: 0, unit: 'lb' },
+  { name: 'Crystal 50L', amount: 0, unit: 'lb' },
+  { name: 'Crystal 60L', amount: 0, unit: 'lb' },
+  { name: 'Crystal 70L', amount: 0, unit: 'lb' },
+  { name: 'Crystal 90L', amount: 0, unit: 'lb' },
+  { name: 'Crystal Malt 100', amount: 0, unit: 'lb' },
+  { name: 'Crystal Malt 150', amount: 0, unit: 'lb' },
+  { name: 'Crystal Malt 250', amount: 0, unit: 'lb' },
+  { name: 'Crystal Malt 300', amount: 0, unit: 'lb' },
+  { name: 'Crystal Malt 50', amount: 0, unit: 'lb' },
+  { name: 'Crystal Rye', amount: 0, unit: 'lb' },
+  { name: 'Dark Ale', amount: 0, unit: 'lb' },
+  { name: 'Dark Chocolate', amount: 0, unit: 'lb' },
+  { name: 'Dark Crystal 80L', amount: 0, unit: 'lb' },
+  { name: 'Dark Munich', amount: 0, unit: 'lb' },
+  { name: 'Dark Roasted Millet Malt - Gluten Free',
+    amount: 0,
+    unit: 'lb' },
+  { name: 'Dark Wheat', amount: 0, unit: 'lb' },
+  { name: 'Date', amount: 0, unit: 'lb' },
+  { name: 'De-Bittered Black', amount: 0, unit: 'lb' },
+  { name: 'De-Husked Caraf I', amount: 0, unit: 'lb' },
+  { name: 'De-Husked Caraf II', amount: 0, unit: 'lb' },
+  { name: 'De-Husked Caraf III', amount: 0, unit: 'lb' },
+  { name: 'Dextrine Malt', amount: 0, unit: 'lb' },
+  { name: 'Dry Malt Extract - Amber', amount: 0, unit: 'lb' },
+  { name: 'Dry Malt Extract - Dark', amount: 0, unit: 'lb' },
+  { name: 'Dry Malt Extract - Extra Light', amount: 0, unit: 'lb' },
+  { name: 'Dry Malt Extract - Light', amount: 0, unit: 'lb' },
+  { name: 'Dry Malt Extract - Munich', amount: 0, unit: 'lb' },
+  { name: 'Dry Malt Extract - Pilsen', amount: 0, unit: 'lb' },
+  { name: 'Dry Malt Extract - Wheat', amount: 0, unit: 'lb' },
+  { name: 'Enzyme Malt', amount: 0, unit: 'lb' },
+  { name: 'ESB Malt', amount: 0, unit: 'lb' },
+  { name: 'Extra Dark Crystal 120L', amount: 0, unit: 'lb' },
+  { name: 'Extra Dark Crystal 160L', amount: 0, unit: 'lb' },
+  { name: 'Flaked Barley', amount: 0, unit: 'lb' },
+  { name: 'Flaked Corn', amount: 0, unit: 'lb' },
+  { name: 'Flaked Oats', amount: 0, unit: 'lb' },
+  { name: 'Flaked Rice', amount: 0, unit: 'lb' },
+  { name: 'Flaked Rye', amount: 0, unit: 'lb' },
+  { name: 'Flaked Wheat', amount: 0, unit: 'lb' },
+  { name: 'Floor-Malted Bohemian Pilsner', amount: 0, unit: 'lb' },
+  { name: 'Floor-Malted Bohemian Pilsner Dk',
+    amount: 0,
+    unit: 'lb' },
+  { name: 'Floor-Malted Bohemian Wheat', amount: 0, unit: 'lb' },
+  { name: 'Golden Naked Oats', amount: 0, unit: 'lb' },
+  { name: 'Golden Promise', amount: 0, unit: 'lb' },
+  { name: 'Gooseberry', amount: 0, unit: 'lb' },
+  { name: 'Grits', amount: 0, unit: 'lb' },
+  { name: 'Halcyon', amount: 0, unit: 'lb' },
+  { name: 'Honey', amount: 0, unit: 'lb' },
+  { name: 'Honey (Buckwheat)', amount: 0, unit: 'lb' },
+  { name: 'Honey Malt', amount: 0, unit: 'lb' },
+  { name: 'Invert Sugar', amount: 0, unit: 'lb' },
+  { name: 'Kölsch', amount: 0, unit: 'lb' },
+  { name: 'Lactose (Milk Sugar)', amount: 0, unit: 'lb' },
+  { name: 'Lager', amount: 0, unit: 'lb' },
+  { name: 'Light Roasted Millet Malt - Gluten Free',
+    amount: 0,
+    unit: 'lb' },
+  { name: 'Lime', amount: 0, unit: 'lb' },
+  { name: 'Liquid Malt Extract - Amber', amount: 0, unit: 'lb' },
+  { name: 'Liquid Malt Extract - Dark', amount: 0, unit: 'lb' },
+  { name: 'Liquid Malt Extract - Extra Light',
+    amount: 0,
+    unit: 'lb' },
+  { name: 'Liquid Malt Extract - Light', amount: 0, unit: 'lb' },
+  { name: 'Liquid Malt Extract - Munich', amount: 0, unit: 'lb' },
+  { name: 'Liquid Malt Extract - Pilsen', amount: 0, unit: 'lb' },
+  { name: 'Liquid Malt Extract - Wheat', amount: 0, unit: 'lb' },
+  { name: 'Malted Naked Oats', amount: 0, unit: 'lb' },
+  { name: 'Maltodextrin', amount: 0, unit: 'lb' },
+  { name: 'Mango', amount: 0, unit: 'lb' },
+  { name: 'Maple Syrup', amount: 0, unit: 'lb' },
+  { name: 'Maris Otter Pale', amount: 0, unit: 'lb' },
+  { name: 'Medium Roasted Millet Malt - Gluten Free',
+    amount: 0,
+    unit: 'lb' },
+  { name: 'Melanoid Malt', amount: 0, unit: 'lb' },
+  { name: 'Melanoidin', amount: 0, unit: 'lb' },
+  { name: 'Midnight Wheat Malt', amount: 0, unit: 'lb' },
+  { name: 'Mild', amount: 0, unit: 'lb' },
+  { name: 'Molasses', amount: 0, unit: 'lb' },
+  { name: 'Munich', amount: 0, unit: 'lb' },
+  { name: 'Munich', amount: 0, unit: 'lb' },
+  { name: 'Munich - 60L', amount: 0, unit: 'lb' },
+  { name: 'Munich - Dark 20L', amount: 0, unit: 'lb' },
+  { name: 'Munich - Light 10L', amount: 0, unit: 'lb' },
+  { name: 'Munich Dark', amount: 0, unit: 'lb' },
+  { name: 'Munich Dark', amount: 0, unit: 'lb' },
+  { name: 'Munich Light', amount: 0, unit: 'lb' },
+  { name: 'Munich Light', amount: 0, unit: 'lb' },
+  { name: 'Munich Malt', amount: 0, unit: 'lb' },
+  { name: 'Munich Millet Malt - Gluten Free',
+    amount: 0,
+    unit: 'lb' },
+  { name: 'Oat Malt', amount: 0, unit: 'lb' },
+  { name: 'Optic', amount: 0, unit: 'lb' },
+  { name: 'Organic Pilsner Malt', amount: 0, unit: 'lb' },
+  { name: 'Pale 2-Row', amount: 0, unit: 'lb' },
+  { name: 'Pale 2-Row', amount: 0, unit: 'lb' },
+  { name: 'Pale 2-Row', amount: 0, unit: 'lb' },
+  { name: 'Pale 2-Row - Toasted', amount: 0, unit: 'lb' },
+  { name: 'Pale 6-Row', amount: 0, unit: 'lb' },
+  { name: 'Pale Ale', amount: 0, unit: 'lb' },
+  { name: 'Pale Ale', amount: 0, unit: 'lb' },
+  { name: 'Pale Ale', amount: 0, unit: 'lb' },
+  { name: 'Pale Ale Malt', amount: 0, unit: 'lb' },
+  { name: 'Pale Chocolate', amount: 0, unit: 'lb' },
+  { name: 'Pale Millet Malt - Gluten Free', amount: 0, unit: 'lb' },
+  { name: 'Pale Wheat', amount: 0, unit: 'lb' },
+  { name: 'Pale Wheat', amount: 0, unit: 'lb' },
+  { name: 'Peach', amount: 0, unit: 'lb' },
+  { name: 'Pear', amount: 0, unit: 'lb' },
+  { name: 'Pearl', amount: 0, unit: 'lb' },
+  { name: 'Peated Malt', amount: 0, unit: 'lb' },
+  { name: 'Pilsen', amount: 0, unit: 'lb' },
+  { name: 'Pilsner', amount: 0, unit: 'lb' },
+  { name: 'Pilsner', amount: 0, unit: 'lb' },
+  { name: 'Pilsner', amount: 0, unit: 'lb' },
+  { name: 'Pilsner Malt', amount: 0, unit: 'lb' },
+  { name: 'Pineapple', amount: 0, unit: 'lb' },
+  { name: 'Plum', amount: 0, unit: 'lb' },
+  { name: 'Raspberry', amount: 0, unit: 'lb' },
+  { name: 'Red Wheat', amount: 0, unit: 'lb' },
+  { name: 'Red X', amount: 0, unit: 'lb' },
+  { name: 'Rice Hulls', amount: 0, unit: 'lb' },
+  { name: 'Rice Syrup Solids', amount: 0, unit: 'lb' },
+  { name: 'Roasted Barley', amount: 0, unit: 'lb' },
+  { name: 'Roasted Barley', amount: 0, unit: 'lb' },
+  { name: 'Roasted Barley', amount: 0, unit: 'lb' },
+  { name: 'Rolled Oats', amount: 0, unit: 'lb' },
+  { name: 'Rye', amount: 0, unit: 'lb' },
+  { name: 'Rye', amount: 0, unit: 'lb' },
+  { name: 'Smoked Malt', amount: 0, unit: 'lb' },
+  { name: 'Smoked Malt', amount: 0, unit: 'lb' },
+  { name: 'Soft Candi Sugar - Blond', amount: 0, unit: 'lb' },
+  { name: 'Soft Candi Sugar - Brown', amount: 0, unit: 'lb' },
+  { name: 'Special B', amount: 0, unit: 'lb' },
+  { name: 'Special Roast', amount: 0, unit: 'lb' },
+  { name: 'Spelt Malt', amount: 0, unit: 'lb' },
+  { name: 'Strawberry', amount: 0, unit: 'lb' },
+  { name: 'Torrified Barley', amount: 0, unit: 'lb' },
+  { name: 'Torrified Wheat', amount: 0, unit: 'lb' },
+  { name: 'Turbinado', amount: 0, unit: 'lb' },
+  { name: 'Unmalted Wheat', amount: 0, unit: 'lb' },
+  { name: 'Victory', amount: 0, unit: 'lb' },
+  { name: 'Vienna', amount: 0, unit: 'lb' },
+  { name: 'Vienna', amount: 0, unit: 'lb' },
+  { name: 'Vienna Malt', amount: 0, unit: 'lb' },
+  { name: 'Watermelon', amount: 0, unit: 'lb' },
+  { name: 'Wheat', amount: 0, unit: 'lb' },
+  { name: 'Wheat', amount: 0, unit: 'lb' },
+  { name: 'Wheat', amount: 0, unit: 'lb' },
+  { name: 'Wheat Malt', amount: 0, unit: 'lb' },
+  { name: 'Wheat Malt', amount: 0, unit: 'lb' },
+  { name: 'White Sorghum Syrup - Gluten Free',
+    amount: 0,
+    unit: 'lb' },
+  { name: 'White Wheat', amount: 0, unit: 'lb' } ]
 
-module.exports = { hops: hops, yeast: yeast, fermentables: fermentables, extras: extras };
+var extras = [ { name: 'Oak Chips (Light)', amount: 0, unit: 'lb' },
+  { name: 'Orange Juice', amount: 0, unit: 'lb' },
+  { name: 'Orange Peel', amount: 0, unit: 'lb' },
+  { name: 'Orange Zest', amount: 0, unit: 'lb' },
+  { name: 'Peaches (Fresh)', amount: 0, unit: 'lb' },
+  { name: 'Peaches (Frozen)', amount: 0, unit: 'lb' },
+  { name: 'Peach Puree', amount: 0, unit: 'lb' },
+  { name: 'Pumpkin Pie Spice', amount: 0, unit: 'lb' },
+  { name: 'Pumpkin Puree', amount: 0, unit: 'lb' },
+  { name: 'Raisins', amount: 0, unit: 'lb' },
+  { name: 'Raspberry Extract', amount: 0, unit: 'lb' },
+  { name: 'Raspberry Puree', amount: 0, unit: 'lb' },
+  { name: 'Raspberry (Whole)', amount: 0, unit: 'lb' },
+  { name: 'Rose Hips', amount: 0, unit: 'lb' },
+  { name: 'Rosemary (Dried)', amount: 0, unit: 'lb' },
+  { name: 'Rosemary (Fresh)', amount: 0, unit: 'lb' },
+  { name: 'Sage (Dried)', amount: 0, unit: 'lb' },
+  { name: 'Sage (Fresh)', amount: 0, unit: 'lb' },
+  { name: 'Serrano Chili', amount: 0, unit: 'lb' },
+  { name: 'Servomyces Yeast Nutrient', amount: 0, unit: 'lb' },
+  { name: 'Sour Cherries (Fresh)', amount: 0, unit: 'lb' },
+  { name: 'Sour Cherries (Frozen)', amount: 0, unit: 'lb' },
+  { name: 'Spearmint (Dried)', amount: 0, unit: 'lb' },
+  { name: 'Spearmint (Fresh)', amount: 0, unit: 'lb' },
+  { name: 'Spruce Essence', amount: 0, unit: 'lb' },
+  { name: 'Spruce Tips', amount: 0, unit: 'lb' },
+  { name: 'Star Anise', amount: 0, unit: 'lb' },
+  { name: 'Strawberries (Fresh)', amount: 0, unit: 'lb' },
+  { name: 'Strawberries (Frozen)', amount: 0, unit: 'lb' },
+  { name: 'Strawberry Extract', amount: 0, unit: 'lb' },
+  { name: 'Super Moss HB', amount: 0, unit: 'lb' },
+  { name: 'Sweet Orange Peel', amount: 0, unit: 'lb' },
+  { name: 'Toasted Coconut', amount: 0, unit: 'lb' },
+  { name: 'Vanilla Beans', amount: 0, unit: 'lb' },
+  { name: 'Vanilla Extract', amount: 0, unit: 'lb' },
+  { name: 'Watermelon Extract', amount: 0, unit: 'lb' },
+  { name: 'Whirlfloc Tablet', amount: 0, unit: 'lb' },
+  { name: 'Whiskey', amount: 0, unit: 'lb' },
+  { name: 'Whole Cloves', amount: 0, unit: 'lb' },
+  { name: 'Wintergreen Leaves', amount: 0, unit: 'lb' },
+  { name: 'Wormwood (Dried)', amount: 0, unit: 'lb' },
+  { name: 'Yeast Energizer', amount: 0, unit: 'lb' },
+  { name: 'Yeast Nutrient (Wyeast)', amount: 0, unit: 'lb' },
+  { name: 'Oak Chips (Light)', amount: 0, unit: 'lb' },
+  { name: 'Orange Juice', amount: 0, unit: 'lb' },
+  { name: 'Orange Peel', amount: 0, unit: 'lb' },
+  { name: 'Orange Zest', amount: 0, unit: 'lb' },
+  { name: 'Peaches (Fresh)', amount: 0, unit: 'lb' },
+  { name: 'Peaches (Frozen)', amount: 0, unit: 'lb' },
+  { name: 'Peach Puree', amount: 0, unit: 'lb' },
+  { name: 'Pumpkin Pie Spice', amount: 0, unit: 'lb' },
+  { name: 'Pumpkin Puree', amount: 0, unit: 'lb' },
+  { name: 'Raisins', amount: 0, unit: 'lb' },
+  { name: 'Raspberry Extract', amount: 0, unit: 'lb' },
+  { name: 'Raspberry Puree', amount: 0, unit: 'lb' },
+  { name: 'Raspberry (Whole)', amount: 0, unit: 'lb' },
+  { name: 'Rose Hips', amount: 0, unit: 'lb' },
+  { name: 'Rosemary (Dried)', amount: 0, unit: 'lb' },
+  { name: 'Rosemary (Fresh)', amount: 0, unit: 'lb' },
+  { name: 'Sage (Dried)', amount: 0, unit: 'lb' },
+  { name: 'Sage (Fresh)', amount: 0, unit: 'lb' },
+  { name: 'Serrano Chili', amount: 0, unit: 'lb' },
+  { name: 'Servomyces Yeast Nutrient', amount: 0, unit: 'lb' },
+  { name: 'Sour Cherries (Fresh)', amount: 0, unit: 'lb' },
+  { name: 'Sour Cherries (Frozen)', amount: 0, unit: 'lb' },
+  { name: 'Spearmint (Dried)', amount: 0, unit: 'lb' },
+  { name: 'Spearmint (Fresh)', amount: 0, unit: 'lb' },
+  { name: 'Spruce Essence', amount: 0, unit: 'lb' },
+  { name: 'Spruce Tips', amount: 0, unit: 'lb' },
+  { name: 'Star Anise', amount: 0, unit: 'lb' },
+  { name: 'Strawberries (Fresh)', amount: 0, unit: 'lb' },
+  { name: 'Strawberries (Frozen)', amount: 0, unit: 'lb' },
+  { name: 'Strawberry Extract', amount: 0, unit: 'lb' },
+  { name: 'Super Moss HB', amount: 0, unit: 'lb' },
+  { name: 'Sweet Orange Peel', amount: 0, unit: 'lb' },
+  { name: 'Toasted Coconut', amount: 0, unit: 'lb' },
+  { name: 'Vanilla Beans', amount: 0, unit: 'lb' },
+  { name: 'Vanilla Extract', amount: 0, unit: 'lb' },
+  { name: 'Watermelon Extract', amount: 0, unit: 'lb' },
+  { name: 'Whirlfloc Tablet', amount: 0, unit: 'lb' },
+  { name: 'Whiskey', amount: 0, unit: 'lb' },
+  { name: 'Whole Cloves', amount: 0, unit: 'lb' },
+  { name: 'Wintergreen Leaves', amount: 0, unit: 'lb' },
+  { name: 'Wormwood (Dried)', amount: 0, unit: 'lb' },
+  { name: 'Yeast Energizer', amount: 0, unit: 'lb' },
+  { name: 'Yeast Nutrient (Wyeast)', amount: 0, unit: 'lb' } ]
+
+
+module.exports = { hops: hops, yeast: yeast, fermentables: fermentables, extras: extras}
 
 },{}],3:[function(require,module,exports){
 
-// High Level Dependencies dealing with React
+// High Level Dependencies dealing with React 
 var React = require('react');
 var ReactDOM = require('react-dom');
 var Router = require('react-router').Router;
 var Route = require('react-router').Route;
 var IndexRoute = require('react-router').IndexRoute;
 var Link = require('react-router').Link;
-// Component Dependencies
+// Component Dependencies 
 var BeerForm = require('./components/beer_recipe');
 
-var App = React.createClass({
-  displayName: 'App',
-
-  // Create high level App component that will hold high level data
+var App = React.createClass({displayName: "App",
+  // Create high level App component that will hold high level data 
   // logic and routing of different paths
-  render: function () {
-    return React.createElement(
-      'div',
-      { className: 'container' },
-      this.props.children
-    );
+  render: function() {
+    return (
+      React.createElement("div", {className: "container"}, 
+        this.props.children
+      )
+      );
   }
 });
 
-var routes =
-// Add Routes to handle URL paths for Index and Creating Recipie
-React.createElement(
-  Route,
-  { path: '/', component: App },
-  React.createElement(IndexRoute, { component: BeerForm })
+var routes =  (
+  // Add Routes to handle URL paths for Index and Creating Recipie
+  React.createElement(Route, {path: "/", component: App}, 
+    React.createElement(IndexRoute, {component: BeerForm})
+  )
 );
 
 ReactDOM.render(
-// Mount Routes to app component
-React.createElement(
-  Router,
-  null,
-  routes
-), document.getElementById('app'));
+  // Mount Routes to app component
+  React.createElement(Router, null, routes),
+  document.getElementById('app')
+);
 
 },{"./components/beer_recipe":4,"react":228,"react-dom":43,"react-router":63}],4:[function(require,module,exports){
 var React = require('react');
@@ -106,12 +588,11 @@ var RecipeSaved = require('./recipe_saved');
 var Errors = require('./errors');
 var LinkedState = require('react-addons-linked-state-mixin');
 
-module.exports = BeerRecipe = React.createClass({
-  displayName: 'BeerRecipe',
-
+module.exports = BeerRecipe = React.createClass({displayName: "BeerRecipe",
   mixins: [LinkedState],
-  getInitialState: function () {
-    return {
+  getInitialState: function() {
+    // Keep statful variables representing what a recipe has 
+    return ({
       name: "",
       type: "",
       style: "",
@@ -121,160 +602,121 @@ module.exports = BeerRecipe = React.createClass({
       fermentables: [],
       errors: [],
       modal: false
-    };
+    })
   },
 
-  componenetDidMount: function () {
+  componenetDidMount: function() {
     this.modal = "";
   },
 
-  _renderFormFields: function () {
-    return React.createElement(
-      'div',
-      { className: 'about' },
-      React.createElement(
-        'h2',
-        null,
-        'Recipe Builder'
-      ),
-      React.createElement(
-        'div',
-        { className: 'form-group' },
-        React.createElement(
-          'label',
-          { htmlFor: 'name' },
-          'Name'
-        ),
-        React.createElement('input', {
-          id: 'name',
-          type: 'text',
-          valueLink: this.linkState('name'),
-          placeholder: 'Name your recipie' })
-      ),
-      React.createElement(
-        'div',
-        { className: 'form-group' },
-        React.createElement(
-          'label',
-          { htmlFor: 'style' },
-          'Style'
-        ),
-        React.createElement('input', {
-          id: 'style',
-          type: 'text',
-          valueLink: this.linkState('style'),
-          placeholder: 'Enter your recipie\'s style' })
-      ),
-      React.createElement(
-        'div',
-        { className: 'form-group' },
-        React.createElement(
-          'label',
-          { htmlFor: 'type' },
-          'Type'
-        ),
-        React.createElement('input', {
-          id: 'type',
-          type: 'text',
-          valueLink: this.linkState('type'),
-          placeholder: 'Enter your recipie\'s type' })
-      )
-    );
+  _renderFormFields: function() {
+          return (
+          React.createElement("div", {className: "about"}, 
+            React.createElement("h2", null, "Recipe Builder"), 
+            React.createElement("div", {className: "form-group"}, 
+              React.createElement("label", {htmlFor: 'name'}, "Name"), 
+              React.createElement("input", {
+              id: "name", 
+              type: "text", 
+              valueLink: this.linkState('name'), 
+              placeholder: "Name your recipie"})
+            ), 
+            
+            React.createElement("div", {className: "form-group"}, 
+              React.createElement("label", {htmlFor: 'style'}, "Style"), 
+              React.createElement("input", {
+              id: "style", 
+              type: "text", 
+              valueLink: this.linkState('style'), 
+              placeholder: "Enter your recipie's style"})
+            ), 
+            React.createElement("div", {className: "form-group"}, 
+              React.createElement("label", {htmlFor: 'type'}, "Type"), 
+              React.createElement("input", {
+              id: "type", 
+              type: "text", 
+              valueLink: this.linkState('type'), 
+              placeholder: "Enter your recipie's type"})
+            )
+          )
+
+
+          );
   },
 
-  _renderIngredients: function () {
-    return React.createElement(
-      'div',
-      { className: 'cf', id: 'ingredients' },
-      React.createElement(
-        'h2',
-        null,
-        'Ingredients'
-      ),
-      React.createElement(
-        'div',
-        { className: 'left' },
-        this._renderIngredientList('fermentables'),
-        this._renderIngredientList("hops")
-      ),
-      React.createElement(
-        'div',
-        { className: 'right' },
-        this._renderIngredientList("yeast"),
-        this._renderIngredientList("extras")
-      )
-    );
+  _renderIngredients: function() {
+     return (
+        React.createElement("div", {className: "cf", id: 'ingredients'}, 
+          React.createElement("h2", null, "Ingredients"), 
+            React.createElement("div", {className: "left"}, 
+              this._renderIngredientList('fermentables'), 
+              this._renderIngredientList("hops")
+            ), 
+            React.createElement("div", {className: "right"}, 
+              this._renderIngredientList("yeast"), 
+              this._renderIngredientList("extras")
+          )
+        )
+        );
   },
 
-  _renderIngredientList: function (type) {
-    return React.createElement(IngredientList, {
-      type: type,
-      ingredients: this.state[type],
-      readOnly: false,
-      handleClick: this._renderLibraryModal,
-      handleAmountChange: this._handleAmountChange,
-      handleDelete: this._handleDelete });
+  _renderIngredientList: function(type) {
+    return ( 
+      React.createElement(IngredientList, {
+      type: type, 
+      ingredients: this.state[type], 
+      readOnly: false, 
+      handleClick: this._renderLibraryModal, 
+      handleAmountChange: this._handleAmountChange, 
+      handleDelete: this._handleDelete})
+        );
   },
 
-  _renderHeader: function () {
-    var title = this.state.name == "" ? "Untitled Recipe" : this.state.name;
+  _renderHeader: function() {
+    // Check for an empty title and if so, return untitled 
+    var title = (this.state.name == "") ? "Untitled Recipe" : this.state.name;
     var header;
-    header = React.createElement(
-      'div',
-      { className: 'header cf' },
-      React.createElement(
-        'div',
-        { className: 'logo' },
-        React.createElement('img', { className: 'thumb', src: 'images/beer_glass.png' })
-      ),
-      React.createElement(
-        'div',
-        { className: 'header-text' },
-        React.createElement(
-          'h1',
-          null,
-          title
-        ),
-        React.createElement(
-          'h4',
-          null,
-          this.state.style,
-          ' ',
-          this.state.type
-        )
-      ),
-      React.createElement(
-        'div',
-        { className: 'save' },
-        React.createElement(
-          'button',
-          { className: 'fade warning', onClick: this._submitForm },
-          'Save Recipe'
+    header = (
+    React.createElement("div", {className: "header cf"}, 
+        React.createElement("div", {className: "logo"}, 
+          React.createElement("img", {className: "thumb", src: "images/beer_glass.png"})
+        ), 
+        React.createElement("div", {className: "header-text"}, 
+          React.createElement("h1", null, title), 
+          React.createElement("h4", null, this.state.style, " ", this.state.type)
+        ), 
+        React.createElement("div", {className: "save"}, 
+          React.createElement("button", {className: "fade warning", onClick: this._submitForm}, "Save Recipe")
         )
       )
-    );
+      );
     return header;
   },
 
-  _renderLibraryModal: function (type, e) {
+  _renderLibraryModal: function(type, e) {
+    // When activated, store modal library compoenent in instance variable and 
+    // pass to it appropriate type and ingredients
     this.modal = React.createElement(IngredientLibrary, {
-      deleteIngredient: this._handleDelete,
-      addIngredient: this._addIngredient,
-      selectedIngredients: this.state[type],
-      type: type,
-      closeModal: this._closeModal });
-    this.setState({ modal: true });
+    deleteIngredient: this._handleDelete, 
+    addIngredient: this._addIngredient, 
+    selectedIngredients: this.state[type], 
+    type: type, 
+    closeModal: this._closeModal})
+    this.setState({modal: true})
   },
 
-  _closeModal: function () {
+  _closeModal: function() {
+    // Set state to false and instance variable to empty
     this.modal = "";
-    this.setState({ modal: false });
+    this.setState({ modal: false})
   },
 
-  _submitForm: function () {
+  _submitForm: function() {
     var errors = this._validateForm();
     // Client Side Validation of form fields returns errors if any
     if (errors.length == 0) {
+      // Only proceed to create new recipe object if no errors are returned 
+      // from form valiation
       var recipe = {
         name: this.state.name,
         type: this.state.type,
@@ -284,18 +726,25 @@ module.exports = BeerRecipe = React.createClass({
         yeast: this.state.yeast,
         extras: this.state.extras
       };
-      // If I were to save it, this would be the object that could be sent up to the server
+      // If I were to save it, this would be the object that could be sent up to the server 
       // with an Ajax POST request representing the new recipe and it's parts
-      this.modal = React.createElement(RecipeSaved, { newRecipe: this._clearForm, closeModal: this._closeModal, recipe: recipe });
-      this.setState({ modal: true });
+      this.modal = React.createElement(RecipeSaved, {newRecipe: this._clearForm, closeModal: this._closeModal, recipe: recipe})
+      this.setState({ modal: true })
       // Create a successfuly saved message reviewing the recipe and allowing for a new one to be created
     } else {
-        // If errors, re-render componenet with the new errors array
-        this.setState({ errors: errors });
-      }
+      // If errors, re-render componenet with the new errors array
+      this.setState({ errors: errors });
+    }
   },
 
-  _handleAmountChange: function (e, ingredient, change) {
+  _handleAmountChange: function(e, ingredient, change) {
+    // This function handles changing the amount/unit of each ingredient 
+    // Nested form components in IngredientItem handle changes by
+    // recieving this function with a  binding to the correct object
+    // 
+    // Once called, I just change the binded refrence to the correct amount/unit 
+    // and force a rerender of the state without having to traverse the ingredient 
+    // array to find the correct object 
     if (change.amount) {
       ingredient.amount = e.target.value;
     } else {
@@ -305,7 +754,7 @@ module.exports = BeerRecipe = React.createClass({
     this.forceUpdate();
   },
 
-  _validateForm: function () {
+  _validateForm: function() {
     // Generally this would be done at a DB level as well as on the front end
     // The Database validation would be served as a response to the POST request
     // when the form is submitted and I would handle that through a Flux errors store
@@ -322,37 +771,37 @@ module.exports = BeerRecipe = React.createClass({
     return errors;
   },
 
-  _addIngredient: function (type, ingredient) {
-    // Only add ingredient if not already in the list
-    var names = this.state[type].map(function (ing) {
-      return ing.name;
-    });
+  _addIngredient: function(type, ingredient) {
+    var names = this.state[type].map(function(ing) { return ing.name; });
+    // Bind type upon handler assignment and use that type to find correct ingredients array
     if (names.indexOf(ingredient.name) === -1) {
-      var items = this.state[type].concat(ingredient);
-      var newItems = {};
+      // Check if the added ingredient.name is in the current names array
+      // and if update state and rerender
+      var items = this.state[type].concat(ingredient), newItems = {}; 
       newItems[type] = items;
       this.modal = React.createElement(IngredientLibrary, {
-        deleteIngredient: this._handleDelete,
-        addIngredient: this._addIngredient,
-        selectedIngredients: newItems[type],
-        type: type,
-        closeModal: this._closeModal });
-      console.log(newItems);
-      this.setState(newItems);
+           deleteIngredient: this._handleDelete, 
+           addIngredient: this._addIngredient, 
+            selectedIngredients: newItems[type], 
+            type: type, 
+            closeModal: this._closeModal})
+      this.setState(newItems); 
     }
   },
 
-  _handleDelete: function (type, ingredient, e) {
-    var items = this.state[type];
-    var newItems = items.filter(function (ing) {
+  _handleDelete: function(type, ingredient, e) {
+    var items = this.state[type]
+    // Use binded type to again select the correct ingredients array
+    var newItems = items.filter(function(ing){
+      //Use the passed in ingredient to filter out
       return ing.name !== ingredient.name;
     });
     var newState = {};
-    newState[type] = newItems;
-    this.setState(newState);
-  },
+    newState[type] = newItems
+    this.setState(newState)
+  }, 
 
-  _clearForm: function () {
+  _clearForm: function() {
     this.setState({
       name: "",
       type: "",
@@ -363,152 +812,128 @@ module.exports = BeerRecipe = React.createClass({
       fermentables: [],
       errors: [],
       modal: false
-    });
+    })
   },
 
-  render: function () {
-    var modal = this.state.modal ? this.modal : "";
-    return React.createElement(
-      'div',
-      { className: 'beer-form' },
-      modal,
-      this._renderHeader(),
-      React.createElement(Errors, { errors: this.state.errors }),
-      React.createElement(
-        'form',
-        { className: 'recipe-form' },
-        this._renderFormFields(),
+  render: function() {
+    var modal = (this.state.modal) ? this.modal : "";
+    return (
+    React.createElement("div", {className: "beer-form"}, 
+      modal, 
+      this._renderHeader(), 
+      React.createElement(Errors, {errors: this.state.errors}), 
+      React.createElement("form", {className: "recipe-form"}, 
+        this._renderFormFields(), 
         this._renderIngredients()
       )
+    )
     );
   }
-});
+})
 
 },{"./errors":5,"./ingredient_library":7,"./ingredient_list":8,"./recipe_saved":10,"react":228,"react-addons-linked-state-mixin":42}],5:[function(require,module,exports){
 var React = require('react');
 
-module.exports = Errors = React.createClass({
-  displayName: 'Errors',
 
-  _renderErrors: function () {
-    return React.createElement(
-      'div',
-      { className: 'errors' },
-      React.createElement(
-        'ul',
-        null,
-        this.props.errors.map(function (error) {
-          return React.createElement(
-            'li',
-            { key: error },
-            error
-          );
-        })
+module.exports = Errors = React.createClass({displayName: "Errors",
+
+  _renderErrors: function() {
+    return (
+      React.createElement("div", {className: "errors"}, 
+        React.createElement("ul", null, 
+        "// Generate errors list based on props.errors", 
+          this.props.errors.map(function(error){
+            return (React.createElement("li", {key: error}, error));
+          })
+        )
       )
-    );
+      );
   },
 
-  render: function () {
-    var errors = this.props.errors.length == 0 ? "" : this._renderErrors();
-    return React.createElement(
-      'div',
-      null,
-      errors
-    );
+
+  render: function() {
+    var errors = 
+      (this.props.errors.length == 0) ? "" : this._renderErrors();
+      return (React.createElement("div", null, errors));
   }
-});
+})
 
 },{"react":228}],6:[function(require,module,exports){
 var React = require('react');
-module.exports = Ingredient = React.createClass({
-  displayName: 'Ingredient',
+module.exports = Ingredient = React.createClass({displayName: "Ingredient",
 
-  _renderIngredient: function () {
-    var amountRender = !!this.props.handleAmountChange ? this._renderAmountSelect() : this._renderAmount();
-    return React.createElement(
-      'div',
-      { className: 'ingredient-item' },
-      React.createElement(
-        'div',
-        { className: 'ingredient-header' },
-        React.createElement(
-          'h4',
-          null,
-          this.props.ingredient.name
-        ),
+  _renderIngredient: function() {
+    var amountRender = (!!this.props.handleAmountChange) ? this._renderAmountSelect() : this._renderAmount();
+    // Check if it's readONly by checking for the change handler otherwise just render 
+    // readOnly form
+    return (
+    React.createElement("div", {className: "ingredient-item"}, 
+      React.createElement("div", {className: "ingredient-header"}, 
+        React.createElement("h4", null, this.props.ingredient.name), 
         this._renderDeleteButton()
-      ),
-      React.createElement(
-        'div',
-        { className: 'ingredient-form' },
+      ), 
+      React.createElement("div", {className: "ingredient-form"}, 
         amountRender
       )
+  
+    )
     );
   },
 
-  _renderAmountSelect: function () {
+  _renderAmountSelect: function() {
     var options = ['lb', 'oz', 'g'];
     //Render Selection if editable (by checking if amountChange function is undefined)
-    return React.createElement(
-      'div',
-      { className: 'amount' },
-      React.createElement(
-        'label',
-        null,
-        'Amount: '
-      ),
-      React.createElement('input', { onChange: this._handleAmountChange, type: 'text' }),
-      React.createElement(
-        'select',
-        { onChange: this._handleUnitChange },
-        options.map(function (op) {
-          return React.createElement(
-            'option',
-            { key: op, value: op },
-            op
-          );
-        })
-      )
-    );
+    return (
+        React.createElement("div", {className: "amount"}, 
+          React.createElement("label", null, "Amount: "), 
+          React.createElement("input", {onChange: this._handleAmountChange, type: "text"}), 
+          React.createElement("select", {onChange: this._handleUnitChange}, 
+            options.map(function(op){
+              return React.createElement("option", {key: op, value: op}, op)
+            })
+          )
+        )
+      );
   },
 
-  _renderAmount: function () {
-    return React.createElement(
-      'div',
-      { className: 'amount' },
-      React.createElement(
-        'p',
-        null,
-        'Amount: ',
-        this.props.ingredient.amount,
-        ' ',
-        this.props.ingredient.unit,
-        ' '
-      )
-    );
+  _renderAmount: function() {
+    // ReadOnly form of amount
+    return (
+        React.createElement("div", {className: "amount"}, 
+          React.createElement("p", null, "Amount: ", this.props.ingredient.amount, " ", this.props.ingredient.unit, " ")
+        )
+      );
   },
 
-  _handleUnitChange: function (e) {
-    this.props.handleAmountChange.call(null, e, this.props.ingredient, { amount: false, unit: true });
+  _handleUnitChange: function(e) {
+    // Only called if handleAmount handler is passed 
+    // call the parent function with the bound reference to the correct ingredient and 
+    // an object saying if it's an amount/unit that's being updated 
+    // 
+    // Pass up the event to grab the changed value 
+    this.props.handleAmountChange.call(null, e, this.props.ingredient, { amount: false, unit: true })
   },
 
-  _handleAmountChange: function (e) {
-    this.props.handleAmountChange.call(null, e, this.props.ingredient, { amount: true, unit: false });
+  _handleAmountChange: function(e) {
+    // Only called if handleAmount handler is passed 
+    // call the parent function with the bound reference to the correct ingredient and 
+    // an object saying if it's an amount/unit that's being updated 
+    // 
+    // Pass up the event to grab the changed value 
+    this.props.handleAmountChange.call(null, e, this.props.ingredient, { amount: true, unit: false })
   },
 
-  _renderDeleteButton: function () {
-    var button = !!this.props.handleDelete ? React.createElement(
-      'button',
-      { onClick: this.props.handleDelete, className: 'fade remove warning' },
-      'X'
-    ) : "";
+  _renderDeleteButton: function() {
+    // Only Render if not ReadOnly
+    var button = (!!this.props.handleDelete) ? 
+    React.createElement("button", {onClick: this.props.handleDelete, className: "fade remove warning"}, "X") : "";
     return button;
   },
 
-  render: function () {
-    return this._renderIngredient();
+  render: function() {
+    return (this._renderIngredient())
   }
-});
+})
 
 },{"react":228}],7:[function(require,module,exports){
 var React = require('react');
@@ -516,114 +941,106 @@ var actions = require('../actions/actions');
 var LibraryItem = require('./library_item');
 var IngredientStore = require('../stores/ingredient_store');
 
-module.exports = IngredientLibrary = React.createClass({
-  displayName: 'IngredientLibrary',
-
-  getInitialState: function () {
-    return { ingredients: IngredientStore.allIngredients() };
+module.exports = IngredientLibrary = React.createClass({displayName: "IngredientLibrary",
+  getInitialState: function() {
+    // set initial state to what's in the Ingredient Store 
+    return { ingredients: IngredientStore.allIngredients() }
   },
 
-  componentDidMount: function () {
+  componentDidMount: function() {
+    // Add Change listener to update state whenever store is updated 
     IngredientStore.addAllIngredientChangeListener(this._handleIngredientChange);
     IngredientStore.addSearchChangeListener(this._handleSearch);
+    // Simulated API request to get current ingredients from server 
     actions.recieveIngredients(this.props.type);
   },
 
-  componentWillUnmount: function () {
+  componentWillUnmount: function() {
+    // Remove change handleres 
     IngredientStore.removeAllIngredientChangeListener(this._handleIngredientChange);
     IngredientStore.removeSearchChangeListener(this._handleSearch);
   },
 
-  _handleIngredientChange: function () {
-    this.setState({ ingredients: IngredientStore.allIngredients() });
+  _handleIngredientChange: function() {
+    this.setState({ ingredients: IngredientStore.allIngredients()})
   },
 
-  _handleSearch: function () {
-    this.setState({ ingredients: IngredientStore.searchIngredients() });
+  _handleSearch: function() {
+    // When search event is emmited, query store for filtered ingredients 
+    this.setState({ ingredients: IngredientStore.searchIngredients()})
   },
 
-  _handleSearchChange: function (e) {
+  _handleSearchChange: function(e) {
+    // Simulate API search request by getting current search string 
+    // and sending out a search action
     actions.searchIngredients(e.target.value);
   },
 
-  _handleClick: function (ingredient, e) {
+  _handleClick: function(ingredient, e) {
+    // Add correct classes to signify if the ingredient is currently 
+    // selected or not and then call recipe Level add/remove handelers 
+    // as needed 
     var target = e.currentTarget.getElementsByTagName('i')[0];
     if (target.classList.contains('fa-check-square-o')) {
       target.classList.remove('fa-check-square-o');
       target.classList.add('fa-square-o');
-      this.props.deleteIngredient.call(null, this.props.type, ingredient);
+      this.props.deleteIngredient.call(null, this.props.type, ingredient)
     } else {
       target.classList.add('fa-check-square-o');
       target.classList.remove('fa-square-o');
       this.props.addIngredient.call(null, this.props.type, ingredient);
-    }
+    } 
   },
 
-  _renderIngredientsLibrary: function () {
-    return React.createElement(
-      'div',
-      null,
-      React.createElement(
-        'div',
-        { className: 'library-head' },
-        React.createElement('div', { className: 'add' }),
-        React.createElement(
-          'div',
-          { className: 'name' },
-          'Name'
+  _renderIngredientsLibrary: function() {
+    return (
+        React.createElement("div", null, 
+          React.createElement("div", {className: "library-head"}, 
+              React.createElement("div", {className: "add"}), 
+              React.createElement("div", {className: "name"}, "Name")
+          ), 
+          
+            this._renderIngredients()
+          
         )
-      ),
-      this._renderIngredients()
-    );
+      );
   },
 
-  _renderIngredients: function () {
+  _renderIngredients: function() {
+    // All possible currently in store
     var ingredients = this.state.ingredients;
-    var selectedIngredients = this.props.selectedIngredients.map(function (ing) {
-      return ing.name;
-    });
-    return React.createElement(
-      'div',
-      { className: 'library-items' },
-      ingredients.map((function (ing) {
-        var name = ing.name;
-        var checked = selectedIngredients.indexOf(name) !== -1;
-        return React.createElement(LibraryItem, { key: name, handleClick: this._handleClick.bind(null, ing), checked: checked, name: name });
-      }).bind(this))
-    );
+    // make new array of currently selected ingredients
+    var selectedIngredients = this.props.selectedIngredients.map(function(ing) { return ing.name });
+
+    return(React.createElement("div", {className: "library-items"}, 
+          
+            ingredients.map(function(ing){
+            var name = ing.name;
+            var checked = (selectedIngredients.indexOf(name) !== -1); 
+            // Check if ing is also selected and set checked flag to pass down to Item component
+            return (React.createElement(LibraryItem, {key: name, handleClick: this._handleClick.bind(null, ing), checked: checked, name: name}))}.bind(this))
+          
+          ))
   },
 
-  render: function () {
-    return React.createElement(
-      'section',
-      { id: 'modal', className: 'modal is-active' },
-      React.createElement(
-        'div',
-        { className: 'library' },
-        React.createElement(
-          'div',
-          { className: 'header' },
-          React.createElement(
-            'h1',
-            null,
-            this.props.type,
-            ' Library'
-          ),
-          React.createElement(
-            'button',
-            { onClick: this.props.closeModal, className: 'modal-close fade warning remove' },
-            'X'
-          )
-        ),
-        React.createElement(
-          'div',
-          { className: 'search' },
-          React.createElement('input', { onChange: this._handleSearchChange, type: 'text', placeholder: 'Search...' })
-        ),
-        this._renderIngredientsLibrary()
-      ),
-      React.createElement('div', { className: 'modal-screen' })
-    );
+  render: function() {
+    return (
+      React.createElement("section", {id: "modal", className: "modal is-active"}, 
+          React.createElement("div", {className: "library"}, 
+            React.createElement("div", {className: "header"}, 
+              React.createElement("h1", null, 
+                this.props.type, " Library"
+              ), 
+              React.createElement("button", {onClick: this.props.closeModal, className: "modal-close fade warning remove"}, "X")
+            ), 
+            React.createElement("div", {className: "search"}, 
+              React.createElement("input", {onChange: this._handleSearchChange, type: "text", placeholder: "Search..."})
+            ), 
+            this._renderIngredientsLibrary()
+          ), 
+          React.createElement("div", {className: "modal-screen"})
+        )
+      );
   }
 });
 
@@ -631,103 +1048,89 @@ module.exports = IngredientLibrary = React.createClass({
 var React = require('react');
 var IngredientItem = require('./ingredient_item');
 
-// Ingredient List takes the following props
+
+// Ingredient List takes the following props 
 // type: Type of ingredient (ie. Hops, Yeast, etc)
 // ingredients: An arrray of ingredients of the type listed above
 // readOnly: Boolean -- True signifies it's only a list of ingredients, false
 //    means items can be deleted and there's an add ingredient link
-//  handleClick: if not readOnly, handles adding new ingredients to list
+//  handleClick: if not readOnly, handles adding new ingredients to list 
 //  handleDelete: if not readOnly, handles removing ingredients from list
-module.exports = IngredientList = React.createClass({
-  displayName: 'IngredientList',
+module.exports = IngredientList = React.createClass({displayName: "IngredientList",
 
-  _renderItem: function () {
+  _renderItem: function() {
     var addIngredient, Ingredient;
     if (!this.props.readOnly) {
-      // Editable
-      addIngredient = React.createElement(
-        'div',
-        { className: 'add-ingredient' },
-        React.createElement(
-          'a',
-          { onClick: this.props.handleClick.bind(null, this.props.type) },
-          React.createElement('i', { className: 'fa fa-search' }),
-          'Add ',
-          this.props.type
+      // Editable State with handelers 
+      addIngredient = (
+        React.createElement("div", {className: "add-ingredient"}, 
+            React.createElement("a", {onClick: this.props.handleClick.bind(null, this.props.type)}, 
+              React.createElement("i", {className: "fa fa-search"}), 
+              "Add ", this.props.type
+            )
+          )
+          );
+      Ingredient = (
+        React.createElement("div", null, 
+          
+            this.props.ingredients.map(function(ing){
+              return React.createElement(IngredientItem, {
+                      key: ing.name, 
+                      type: this.props.type, 
+                      ingredient: ing, 
+                      readOnly: this.props.readOnly, 
+                      handleAmountChange: this.props.handleAmountChange, 
+                      handleDelete: this.props.handleDelete.bind(null, this.props.type, ing)})
+              }.bind(this))
         )
-      );
-      Ingredient = React.createElement(
-        'div',
-        null,
-        this.props.ingredients.map((function (ing) {
-          return React.createElement(IngredientItem, {
-            key: ing.name,
-            type: this.props.type,
-            ingredient: ing,
-            readOnly: this.props.readOnly,
-            handleAmountChange: this.props.handleAmountChange,
-            handleDelete: this.props.handleDelete.bind(null, this.props.type, ing) });
-        }).bind(this))
-      );
+        );
+
     } else {
-      //ReadOnly
-      addIngredient = "";
-      Ingredient = React.createElement(
-        'div',
-        null,
-        this.props.ingredients.map((function (ing) {
-          return React.createElement(IngredientItem, { key: ing.name,
-            type: this.props.type,
-            ingredient: ing,
-            handleDelete: false });
-        }).bind(this))
-      );
+      //ReadOnly state without handelers 
+      addIngredient = ("");
+      Ingredient = (
+        React.createElement("div", null, 
+          
+            this.props.ingredients.map(function(ing){
+              return React.createElement(IngredientItem, {key: ing.name, 
+                      type: this.props.type, 
+                      ingredient: ing, 
+                      handleDelete: false})
+              }.bind(this))
+        )
+        );
     }
-    return { addIngredient: addIngredient, Ingredient: Ingredient };
+    return {addIngredient: addIngredient, Ingredient: Ingredient};
   },
 
-  render: function () {
+  render: function() {
     var item = this._renderItem();
-    return React.createElement(
-      'div',
-      { className: 'ingredient-list' },
-      React.createElement(
-        'div',
-        null,
-        React.createElement(
-          'h3',
-          null,
-          this.props.type
-        ),
-        item.addIngredient
-      ),
-      item.Ingredient
-    );
+    return (
+      React.createElement("div", {className: "ingredient-list"}, 
+        React.createElement("div", null, 
+          React.createElement("h3", null, this.props.type), 
+          item.addIngredient
+        ), 
+        item.Ingredient
+      )
+      );
   }
-});
+})
 
 },{"./ingredient_item":6,"react":228}],9:[function(require,module,exports){
 var React = require('react');
 
-module.exports = LibraryItem = React.createClass({
-  displayName: "LibraryItem",
 
-  render: function () {
-    var check = this.props.checked ? "fa-check-square-o" : "fa-square-o";
-    return React.createElement(
-      "div",
-      { className: "item", onClick: this.props.handleClick },
-      React.createElement(
-        "div",
-        { className: "add" },
-        React.createElement("i", { className: "fa " + check })
-      ),
-      React.createElement(
-        "div",
-        { className: "name fade warning" },
-        this.props.name
-      )
-    );
+module.exports = LibraryItem = React.createClass({displayName: "LibraryItem",
+  render: function() {
+    var check = this.props.checked ?  "fa-check-square-o" : "fa-square-o";
+    // Assign correct class based on passed down checked flag
+    return (
+      React.createElement("div", {className: "item", onClick: this.props.handleClick}, 
+          React.createElement("div", {className: "add"}, React.createElement("i", {className: "fa " + check})), 
+          React.createElement("div", {className: "name fade warning"}, this.props.name)
+      )    
+      );
   }
 
 });
@@ -736,79 +1139,43 @@ module.exports = LibraryItem = React.createClass({
 var React = require('react');
 var IngredientList = require('./ingredient_list');
 
-module.exports = RecipeSaved = React.createClass({
-  displayName: 'RecipeSaved',
 
-  render: function () {
+module.exports = RecipeSaved = React.createClass({displayName: "RecipeSaved",
+
+  render: function() {
     var recipe = this.props.recipe;
 
-    var a = React.createElement(IngredientList, { type: 'hops', ingredients: recipe.hops, readOnly: true });
-    return React.createElement(
-      'section',
-      { id: 'modal', className: 'modal is-active' },
-      React.createElement(
-        'div',
-        { className: 'recipe' },
-        React.createElement(
-          'div',
-          { className: 'header' },
-          React.createElement(
-            'h1',
-            null,
-            recipe.name
-          ),
-          React.createElement(
-            'h4',
-            null,
-            recipe.style,
-            ' ',
-            recipe.type
-          ),
-          React.createElement(
-            'button',
-            { onClick: this.props.closeModal, className: 'modal-close remove warning fade' },
-            'X'
-          )
-        ),
-        React.createElement(
-          'div',
-          { className: 'success' },
-          React.createElement(
-            'h3',
-            null,
-            'Here\'s your new recipe!'
-          )
-        ),
-        React.createElement(
-          'div',
-          { className: 'recipe-details cf' },
-          React.createElement(
-            'div',
-            { className: 'left' },
-            React.createElement(IngredientList, { type: 'hops', ingredients: recipe.hops, readOnly: true }),
-            React.createElement(IngredientList, { type: 'yeast', ingredients: recipe.yeast, readOnly: true })
-          ),
-          React.createElement(
-            'div',
-            { className: 'right' },
-            React.createElement(IngredientList, { type: 'extras', ingredients: recipe.extras, readOnly: true }),
-            React.createElement(IngredientList, { type: 'fermentables', ingredients: recipe.fermentables, readOnly: true })
-          )
-        ),
-        React.createElement(
-          'div',
-          { className: 'new-recipe' },
-          React.createElement(
-            'button',
-            { className: 'success', onClick: this.props.newRecipe },
-            'Create New Recipe'
-          )
+    var a = React.createElement(IngredientList, {type: 'hops', ingredients: recipe.hops, readOnly: true})
+    return (
+      React.createElement("section", {id: "modal", className: "modal is-active"}, 
+          React.createElement("div", {className: "recipe"}, 
+            React.createElement("div", {className: "header"}, 
+              React.createElement("h1", null, 
+                recipe.name
+              ), 
+              React.createElement("h4", null, 
+                recipe.style, " ", recipe.type
+              ), 
+              React.createElement("button", {onClick: this.props.closeModal, className: "modal-close remove warning fade"}, "X")
+            ), 
+            React.createElement("div", {className: "success"}, React.createElement("h3", null, "Here's your new recipe!")), 
+            React.createElement("div", {className: "recipe-details cf"}, 
+              React.createElement("div", {className: "left"}, 
+                React.createElement(IngredientList, {type: 'hops', ingredients: recipe.hops, readOnly: true}), 
+                React.createElement(IngredientList, {type: 'yeast', ingredients: recipe.yeast, readOnly: true})
+              ), 
+              React.createElement("div", {className: "right"}, 
+                React.createElement(IngredientList, {type: 'extras', ingredients: recipe.extras, readOnly: true}), 
+                React.createElement(IngredientList, {type: 'fermentables', ingredients: recipe.fermentables, readOnly: true})
+              )
+            ), 
+            React.createElement("div", {className: "new-recipe"}, React.createElement("button", {className: "success", onClick: this.props.newRecipe}, "Create New Recipe"))
+          ), 
+          React.createElement("div", {className: "modal-screen"})
         )
-      ),
-      React.createElement('div', { className: 'modal-screen' })
-    );
+      );
   }
-});
+})
 
 },{"./ingredient_list":8,"react":228}],11:[function(require,module,exports){
 module.exports = {
@@ -908,7 +1275,6 @@ module.exports = function extend() {
 	// Return the modified object
 	return target;
 };
-
 
 },{}],14:[function(require,module,exports){
 /**
@@ -1155,6 +1521,7 @@ var Dispatcher = (function () {
 })();
 
 module.exports = Dispatcher;
+
 }).call(this,require('_process'))
 },{"_process":231,"fbjs/lib/invariant":16}],16:[function(require,module,exports){
 (function (process){
@@ -1207,6 +1574,7 @@ var invariant = function (condition, format, a, b, c, d, e, f) {
 };
 
 module.exports = invariant;
+
 }).call(this,require('_process'))
 },{"_process":231}],17:[function(require,module,exports){
 /**
@@ -1240,6 +1608,7 @@ exports['default'] = {
   REPLACE: REPLACE,
   POP: POP
 };
+
 },{}],18:[function(require,module,exports){
 "use strict";
 
@@ -1267,6 +1636,7 @@ function loopAsync(turns, work, callback) {
 
   next();
 }
+
 },{}],19:[function(require,module,exports){
 (function (process){
 /*eslint-disable no-empty */
@@ -1337,6 +1707,7 @@ function readState(key) {
 
   return null;
 }
+
 }).call(this,require('_process'))
 },{"_process":231,"warning":41}],20:[function(require,module,exports){
 'use strict';
@@ -1414,12 +1785,14 @@ function supportsGoWithoutReloadUsingHash() {
   var ua = navigator.userAgent;
   return ua.indexOf('Firefox') === -1;
 }
+
 },{}],21:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
 var canUseDOM = !!(typeof window !== 'undefined' && window.document && window.document.createElement);
 exports.canUseDOM = canUseDOM;
+
 },{}],22:[function(require,module,exports){
 (function (process){
 'use strict';
@@ -1462,6 +1835,7 @@ function createDOMHistory(options) {
 
 exports['default'] = createDOMHistory;
 module.exports = exports['default'];
+
 }).call(this,require('_process'))
 },{"./DOMUtils":20,"./ExecutionEnvironment":21,"./createHistory":24,"_process":231,"invariant":36}],23:[function(require,module,exports){
 (function (process){
@@ -1690,6 +2064,7 @@ function createHashHistory() {
 
 exports['default'] = createHashHistory;
 module.exports = exports['default'];
+
 }).call(this,require('_process'))
 },{"./Actions":17,"./DOMStateStorage":19,"./DOMUtils":20,"./ExecutionEnvironment":21,"./createDOMHistory":22,"_process":231,"invariant":36,"warning":41}],24:[function(require,module,exports){
 'use strict';
@@ -1962,6 +2337,7 @@ function createHistory() {
 
 exports['default'] = createHistory;
 module.exports = exports['default'];
+
 },{"./Actions":17,"./AsyncUtils":18,"./createLocation":25,"./deprecate":27,"./runTransitionHook":30,"deep-equal":33}],25:[function(require,module,exports){
 'use strict';
 
@@ -1999,6 +2375,7 @@ function createLocation() {
 
 exports['default'] = createLocation;
 module.exports = exports['default'];
+
 },{"./Actions":17,"./parsePath":29}],26:[function(require,module,exports){
 (function (process){
 'use strict';
@@ -2143,6 +2520,7 @@ function createMemoryHistory() {
 
 exports['default'] = createMemoryHistory;
 module.exports = exports['default'];
+
 }).call(this,require('_process'))
 },{"./Actions":17,"./createHistory":24,"_process":231,"invariant":36}],27:[function(require,module,exports){
 (function (process){
@@ -2165,6 +2543,7 @@ function deprecate(fn, message) {
 
 exports['default'] = deprecate;
 module.exports = exports['default'];
+
 }).call(this,require('_process'))
 },{"_process":231,"warning":41}],28:[function(require,module,exports){
 "use strict";
@@ -2180,6 +2559,7 @@ function extractPath(string) {
 
 exports["default"] = extractPath;
 module.exports = exports["default"];
+
 },{}],29:[function(require,module,exports){
 (function (process){
 'use strict';
@@ -2226,6 +2606,7 @@ function parsePath(path) {
 
 exports['default'] = parsePath;
 module.exports = exports['default'];
+
 }).call(this,require('_process'))
 },{"./extractPath":28,"_process":231,"warning":41}],30:[function(require,module,exports){
 (function (process){
@@ -2253,6 +2634,7 @@ function runTransitionHook(hook, location, callback) {
 
 exports['default'] = runTransitionHook;
 module.exports = exports['default'];
+
 }).call(this,require('_process'))
 },{"_process":231,"warning":41}],31:[function(require,module,exports){
 'use strict';
@@ -2384,6 +2766,7 @@ function useBasename(createHistory) {
 
 exports['default'] = useBasename;
 module.exports = exports['default'];
+
 },{"./ExecutionEnvironment":21,"./extractPath":28,"./parsePath":29,"./runTransitionHook":30}],32:[function(require,module,exports){
 'use strict';
 
@@ -2500,6 +2883,7 @@ function useQueries(createHistory) {
 
 exports['default'] = useQueries;
 module.exports = exports['default'];
+
 },{"./parsePath":29,"./runTransitionHook":30,"qs":37}],33:[function(require,module,exports){
 var pSlice = Array.prototype.slice;
 var objectKeys = require('./lib/keys.js');
@@ -3270,6 +3654,7 @@ module.exports = warning;
 }).call(this,require('_process'))
 },{"_process":231}],42:[function(require,module,exports){
 module.exports = require('react/lib/LinkedStateMixin');
+
 },{"react/lib/LinkedStateMixin":90}],43:[function(require,module,exports){
 'use strict';
 
@@ -3334,6 +3719,7 @@ function mapAsync(array, work, callback) {
     });
   });
 }
+
 },{}],45:[function(require,module,exports){
 'use strict';
 
@@ -3358,6 +3744,7 @@ var History = {
 
 exports['default'] = History;
 module.exports = exports['default'];
+
 },{"./PropTypes":52}],46:[function(require,module,exports){
 'use strict';
 
@@ -3401,6 +3788,7 @@ var IndexLink = (function (_Component) {
 
 exports['default'] = IndexLink;
 module.exports = exports['default'];
+
 },{"./Link":50,"react":228}],47:[function(require,module,exports){
 (function (process){
 'use strict';
@@ -3482,6 +3870,7 @@ var IndexRedirect = (function (_Component) {
 
 exports['default'] = IndexRedirect;
 module.exports = exports['default'];
+
 }).call(this,require('_process'))
 },{"./PropTypes":52,"./Redirect":53,"_process":231,"invariant":68,"react":228,"warning":69}],48:[function(require,module,exports){
 (function (process){
@@ -3561,6 +3950,7 @@ var IndexRoute = (function (_Component) {
 
 exports['default'] = IndexRoute;
 module.exports = exports['default'];
+
 }).call(this,require('_process'))
 },{"./PropTypes":52,"./RouteUtils":56,"_process":231,"invariant":68,"react":228,"warning":69}],49:[function(require,module,exports){
 (function (process){
@@ -3628,6 +4018,7 @@ var Lifecycle = {
 
 exports['default'] = Lifecycle;
 module.exports = exports['default'];
+
 }).call(this,require('_process'))
 },{"_process":231,"invariant":68,"react":228}],50:[function(require,module,exports){
 'use strict';
@@ -3803,6 +4194,7 @@ var Link = (function (_Component) {
 
 exports['default'] = Link;
 module.exports = exports['default'];
+
 },{"react":228}],51:[function(require,module,exports){
 (function (process){
 'use strict';
@@ -4032,6 +4424,7 @@ function formatPattern(pattern, params) {
 
   return pathname.replace(/\/+/g, '/');
 }
+
 }).call(this,require('_process'))
 },{"_process":231,"invariant":68}],52:[function(require,module,exports){
 'use strict';
@@ -4087,6 +4480,7 @@ exports['default'] = {
   components: components,
   route: route
 };
+
 },{"react":228}],53:[function(require,module,exports){
 (function (process){
 'use strict';
@@ -4202,6 +4596,7 @@ var Redirect = (function (_Component) {
 
 exports['default'] = Redirect;
 module.exports = exports['default'];
+
 }).call(this,require('_process'))
 },{"./PatternUtils":51,"./PropTypes":52,"./RouteUtils":56,"_process":231,"invariant":68,"react":228}],54:[function(require,module,exports){
 (function (process){
@@ -4280,6 +4675,7 @@ var Route = (function (_Component) {
 
 exports['default'] = Route;
 module.exports = exports['default'];
+
 }).call(this,require('_process'))
 },{"./PropTypes":52,"./RouteUtils":56,"_process":231,"invariant":68,"react":228}],55:[function(require,module,exports){
 'use strict';
@@ -4320,6 +4716,7 @@ var RouteContext = {
 
 exports['default'] = RouteContext;
 module.exports = exports['default'];
+
 },{"react":228}],56:[function(require,module,exports){
 (function (process){
 'use strict';
@@ -4436,6 +4833,7 @@ function createRoutes(routes) {
 
   return routes;
 }
+
 }).call(this,require('_process'))
 },{"_process":231,"react":228,"warning":69}],57:[function(require,module,exports){
 (function (process){
@@ -4610,6 +5008,7 @@ var Router = (function (_Component) {
 
 exports['default'] = Router;
 module.exports = exports['default'];
+
 }).call(this,require('_process'))
 },{"./PropTypes":52,"./RouteUtils":56,"./RoutingContext":58,"./useRoutes":67,"_process":231,"history/lib/createHashHistory":23,"react":228,"warning":69}],58:[function(require,module,exports){
 (function (process){
@@ -4753,6 +5152,7 @@ var RoutingContext = (function (_Component) {
 
 exports['default'] = RoutingContext;
 module.exports = exports['default'];
+
 }).call(this,require('_process'))
 },{"./RouteUtils":56,"./getRouteParams":62,"_process":231,"invariant":68,"react":228}],59:[function(require,module,exports){
 'use strict';
@@ -4827,6 +5227,7 @@ function runLeaveHooks(routes) {
     if (routes[i].onLeave) routes[i].onLeave.call(routes[i]);
   }
 }
+
 },{"./AsyncUtils":44}],60:[function(require,module,exports){
 'use strict';
 
@@ -4884,6 +5285,7 @@ function computeChangedRoutes(prevState, nextState) {
 
 exports['default'] = computeChangedRoutes;
 module.exports = exports['default'];
+
 },{"./PatternUtils":51}],61:[function(require,module,exports){
 'use strict';
 
@@ -4918,6 +5320,7 @@ function getComponents(nextState, callback) {
 
 exports['default'] = getComponents;
 module.exports = exports['default'];
+
 },{"./AsyncUtils":44}],62:[function(require,module,exports){
 'use strict';
 
@@ -4943,6 +5346,7 @@ function getRouteParams(route, params) {
 
 exports['default'] = getRouteParams;
 module.exports = exports['default'];
+
 },{"./PatternUtils":51}],63:[function(require,module,exports){
 /* components */
 'use strict';
@@ -5048,6 +5452,7 @@ exports.match = _match3['default'];
 var _Router4 = _interopRequireDefault(_Router2);
 
 exports['default'] = _Router4['default'];
+
 },{"./History":45,"./IndexLink":46,"./IndexRedirect":47,"./IndexRoute":48,"./Lifecycle":49,"./Link":50,"./PropTypes":52,"./Redirect":53,"./Route":54,"./RouteContext":55,"./RouteUtils":56,"./Router":57,"./RoutingContext":58,"./match":65,"./useRoutes":67}],64:[function(require,module,exports){
 'use strict';
 
@@ -5172,6 +5577,7 @@ function isActive(pathname, query, indexOnly, location, routes, params) {
 
 exports['default'] = isActive;
 module.exports = exports['default'];
+
 },{"./PatternUtils":51}],65:[function(require,module,exports){
 (function (process){
 'use strict';
@@ -5237,6 +5643,7 @@ function match(_ref, callback) {
 
 exports['default'] = match;
 module.exports = exports['default'];
+
 }).call(this,require('_process'))
 },{"./RouteUtils":56,"./useRoutes":67,"_process":231,"history/lib/createMemoryHistory":26,"history/lib/useBasename":31,"invariant":68}],66:[function(require,module,exports){
 (function (process){
@@ -5428,6 +5835,7 @@ function matchRoutes(routes, location, callback) {
 
 exports['default'] = matchRoutes;
 module.exports = exports['default'];
+
 }).call(this,require('_process'))
 },{"./AsyncUtils":44,"./PatternUtils":51,"./RouteUtils":56,"_process":231,"warning":69}],67:[function(require,module,exports){
 (function (process){
@@ -5722,12 +6130,128 @@ function useRoutes(createHistory) {
 
 exports['default'] = useRoutes;
 module.exports = exports['default'];
+
 }).call(this,require('_process'))
 },{"./TransitionUtils":59,"./computeChangedRoutes":60,"./getComponents":61,"./isActive":64,"./matchRoutes":66,"_process":231,"history/lib/Actions":17,"history/lib/useQueries":32,"warning":69}],68:[function(require,module,exports){
-arguments[4][36][0].apply(exports,arguments)
-},{"_process":231,"dup":36}],69:[function(require,module,exports){
-arguments[4][41][0].apply(exports,arguments)
-},{"_process":231,"dup":41}],70:[function(require,module,exports){
+(function (process){
+/**
+ * Copyright 2013-2015, Facebook, Inc.
+ * All rights reserved.
+ *
+ * This source code is licensed under the BSD-style license found in the
+ * LICENSE file in the root directory of this source tree. An additional grant
+ * of patent rights can be found in the PATENTS file in the same directory.
+ */
+
+'use strict';
+
+/**
+ * Use invariant() to assert state which your program assumes to be true.
+ *
+ * Provide sprintf-style format (only %s is supported) and arguments
+ * to provide information about what broke and what you were
+ * expecting.
+ *
+ * The invariant message will be stripped in production, but the invariant
+ * will remain to ensure logic does not differ in production.
+ */
+
+var invariant = function(condition, format, a, b, c, d, e, f) {
+  if (process.env.NODE_ENV !== 'production') {
+    if (format === undefined) {
+      throw new Error('invariant requires an error message argument');
+    }
+  }
+
+  if (!condition) {
+    var error;
+    if (format === undefined) {
+      error = new Error(
+        'Minified exception occurred; use the non-minified dev environment ' +
+        'for the full error message and additional helpful warnings.'
+      );
+    } else {
+      var args = [a, b, c, d, e, f];
+      var argIndex = 0;
+      error = new Error(
+        format.replace(/%s/g, function() { return args[argIndex++]; })
+      );
+      error.name = 'Invariant Violation';
+    }
+
+    error.framesToPop = 1; // we don't care about invariant's own frame
+    throw error;
+  }
+};
+
+module.exports = invariant;
+
+}).call(this,require('_process'))
+},{"_process":231}],69:[function(require,module,exports){
+(function (process){
+/**
+ * Copyright 2014-2015, Facebook, Inc.
+ * All rights reserved.
+ *
+ * This source code is licensed under the BSD-style license found in the
+ * LICENSE file in the root directory of this source tree. An additional grant
+ * of patent rights can be found in the PATENTS file in the same directory.
+ */
+
+'use strict';
+
+/**
+ * Similar to invariant but only logs a warning if the condition is not met.
+ * This can be used to log issues in development environments in critical
+ * paths. Removing the logging code for production environments will keep the
+ * same logic and follow the same code paths.
+ */
+
+var warning = function() {};
+
+if (process.env.NODE_ENV !== 'production') {
+  warning = function(condition, format, args) {
+    var len = arguments.length;
+    args = new Array(len > 2 ? len - 2 : 0);
+    for (var key = 2; key < len; key++) {
+      args[key - 2] = arguments[key];
+    }
+    if (format === undefined) {
+      throw new Error(
+        '`warning(condition, format, ...args)` requires a warning ' +
+        'message argument'
+      );
+    }
+
+    if (format.length < 10 || (/^[s\W]*$/).test(format)) {
+      throw new Error(
+        'The warning format should be able to uniquely identify this ' +
+        'warning. Please, use a more descriptive format than: ' + format
+      );
+    }
+
+    if (!condition) {
+      var argIndex = 0;
+      var message = 'Warning: ' +
+        format.replace(/%s/g, function() {
+          return args[argIndex++];
+        });
+      if (typeof console !== 'undefined') {
+        console.error(message);
+      }
+      try {
+        // This error was thrown as a convenience so that you can use this stack
+        // to find the callsite that caused this warning to fire.
+        throw new Error(message);
+      } catch(x) {}
+    }
+  };
+}
+
+module.exports = warning;
+
+}).call(this,require('_process'))
+},{"_process":231}],70:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
  * All rights reserved.
@@ -5764,6 +6288,7 @@ var AutoFocusUtils = {
 };
 
 module.exports = AutoFocusUtils;
+
 },{"./ReactMount":136,"./findDOMNode":180,"fbjs/lib/focusNode":210}],71:[function(require,module,exports){
 /**
  * Copyright 2013-2015 Facebook, Inc.
@@ -6170,6 +6695,7 @@ var BeforeInputEventPlugin = {
 };
 
 module.exports = BeforeInputEventPlugin;
+
 },{"./EventConstants":83,"./EventPropagators":87,"./FallbackCompositionState":88,"./SyntheticCompositionEvent":162,"./SyntheticInputEvent":166,"fbjs/lib/ExecutionEnvironment":202,"fbjs/lib/keyOf":220}],72:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -6310,6 +6836,7 @@ var CSSProperty = {
 };
 
 module.exports = CSSProperty;
+
 },{}],73:[function(require,module,exports){
 (function (process){
 /**
@@ -6487,6 +7014,7 @@ ReactPerf.measureMethods(CSSPropertyOperations, 'CSSPropertyOperations', {
 });
 
 module.exports = CSSPropertyOperations;
+
 }).call(this,require('_process'))
 },{"./CSSProperty":72,"./ReactPerf":142,"./dangerousStyleValue":177,"_process":231,"fbjs/lib/ExecutionEnvironment":202,"fbjs/lib/camelizeStyleName":204,"fbjs/lib/hyphenateStyleName":215,"fbjs/lib/memoizeStringOnly":222,"fbjs/lib/warning":227}],74:[function(require,module,exports){
 (function (process){
@@ -6583,6 +7111,7 @@ assign(CallbackQueue.prototype, {
 PooledClass.addPoolingTo(CallbackQueue);
 
 module.exports = CallbackQueue;
+
 }).call(this,require('_process'))
 },{"./Object.assign":92,"./PooledClass":93,"_process":231,"fbjs/lib/invariant":216}],75:[function(require,module,exports){
 /**
@@ -6906,6 +7435,7 @@ var ChangeEventPlugin = {
 };
 
 module.exports = ChangeEventPlugin;
+
 },{"./EventConstants":83,"./EventPluginHub":84,"./EventPropagators":87,"./ReactUpdates":155,"./SyntheticEvent":164,"./getEventTarget":186,"./isEventSupported":191,"./isTextInputElement":192,"fbjs/lib/ExecutionEnvironment":202,"fbjs/lib/keyOf":220}],76:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -6930,6 +7460,7 @@ var ClientReactRootIndex = {
 };
 
 module.exports = ClientReactRootIndex;
+
 },{}],77:[function(require,module,exports){
 (function (process){
 /**
@@ -7061,6 +7592,7 @@ ReactPerf.measureMethods(DOMChildrenOperations, 'DOMChildrenOperations', {
 });
 
 module.exports = DOMChildrenOperations;
+
 }).call(this,require('_process'))
 },{"./Danger":80,"./ReactMultiChildUpdateTypes":138,"./ReactPerf":142,"./setInnerHTML":196,"./setTextContent":197,"_process":231,"fbjs/lib/invariant":216}],78:[function(require,module,exports){
 (function (process){
@@ -7298,6 +7830,7 @@ var DOMProperty = {
 };
 
 module.exports = DOMProperty;
+
 }).call(this,require('_process'))
 },{"_process":231,"fbjs/lib/invariant":216}],79:[function(require,module,exports){
 (function (process){
@@ -7526,6 +8059,7 @@ ReactPerf.measureMethods(DOMPropertyOperations, 'DOMPropertyOperations', {
 });
 
 module.exports = DOMPropertyOperations;
+
 }).call(this,require('_process'))
 },{"./DOMProperty":78,"./ReactPerf":142,"./quoteAttributeValueForBrowser":194,"_process":231,"fbjs/lib/warning":227}],80:[function(require,module,exports){
 (function (process){
@@ -7674,6 +8208,7 @@ var Danger = {
 };
 
 module.exports = Danger;
+
 }).call(this,require('_process'))
 },{"_process":231,"fbjs/lib/ExecutionEnvironment":202,"fbjs/lib/createNodesFromMarkup":207,"fbjs/lib/emptyFunction":208,"fbjs/lib/getMarkupWrap":212,"fbjs/lib/invariant":216}],81:[function(require,module,exports){
 /**
@@ -7703,6 +8238,7 @@ var keyOf = require('fbjs/lib/keyOf');
 var DefaultEventPluginOrder = [keyOf({ ResponderEventPlugin: null }), keyOf({ SimpleEventPlugin: null }), keyOf({ TapEventPlugin: null }), keyOf({ EnterLeaveEventPlugin: null }), keyOf({ ChangeEventPlugin: null }), keyOf({ SelectEventPlugin: null }), keyOf({ BeforeInputEventPlugin: null })];
 
 module.exports = DefaultEventPluginOrder;
+
 },{"fbjs/lib/keyOf":220}],82:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -7828,6 +8364,7 @@ var EnterLeaveEventPlugin = {
 };
 
 module.exports = EnterLeaveEventPlugin;
+
 },{"./EventConstants":83,"./EventPropagators":87,"./ReactMount":136,"./SyntheticMouseEvent":168,"fbjs/lib/keyOf":220}],83:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -7921,6 +8458,7 @@ var EventConstants = {
 };
 
 module.exports = EventConstants;
+
 },{"fbjs/lib/keyMirror":219}],84:[function(require,module,exports){
 (function (process){
 /**
@@ -8202,6 +8740,7 @@ var EventPluginHub = {
 };
 
 module.exports = EventPluginHub;
+
 }).call(this,require('_process'))
 },{"./EventPluginRegistry":85,"./EventPluginUtils":86,"./ReactErrorUtils":126,"./accumulateInto":174,"./forEachAccumulated":182,"_process":231,"fbjs/lib/invariant":216,"fbjs/lib/warning":227}],85:[function(require,module,exports){
 (function (process){
@@ -8425,6 +8964,7 @@ var EventPluginRegistry = {
 };
 
 module.exports = EventPluginRegistry;
+
 }).call(this,require('_process'))
 },{"_process":231,"fbjs/lib/invariant":216}],86:[function(require,module,exports){
 (function (process){
@@ -8630,6 +9170,7 @@ var EventPluginUtils = {
 };
 
 module.exports = EventPluginUtils;
+
 }).call(this,require('_process'))
 },{"./EventConstants":83,"./ReactErrorUtils":126,"_process":231,"fbjs/lib/invariant":216,"fbjs/lib/warning":227}],87:[function(require,module,exports){
 (function (process){
@@ -8768,6 +9309,7 @@ var EventPropagators = {
 };
 
 module.exports = EventPropagators;
+
 }).call(this,require('_process'))
 },{"./EventConstants":83,"./EventPluginHub":84,"./accumulateInto":174,"./forEachAccumulated":182,"_process":231,"fbjs/lib/warning":227}],88:[function(require,module,exports){
 /**
@@ -8865,6 +9407,7 @@ assign(FallbackCompositionState.prototype, {
 PooledClass.addPoolingTo(FallbackCompositionState);
 
 module.exports = FallbackCompositionState;
+
 },{"./Object.assign":92,"./PooledClass":93,"./getTextContentAccessor":189}],89:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -9098,6 +9641,7 @@ var HTMLDOMPropertyConfig = {
 };
 
 module.exports = HTMLDOMPropertyConfig;
+
 },{"./DOMProperty":78,"fbjs/lib/ExecutionEnvironment":202}],90:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -9135,6 +9679,7 @@ var LinkedStateMixin = {
 };
 
 module.exports = LinkedStateMixin;
+
 },{"./ReactLink":134,"./ReactStateSetters":153}],91:[function(require,module,exports){
 (function (process){
 /**
@@ -9271,6 +9816,7 @@ var LinkedValueUtils = {
 };
 
 module.exports = LinkedValueUtils;
+
 }).call(this,require('_process'))
 },{"./ReactPropTypeLocations":144,"./ReactPropTypes":145,"_process":231,"fbjs/lib/invariant":216,"fbjs/lib/warning":227}],92:[function(require,module,exports){
 /**
@@ -9320,6 +9866,7 @@ function assign(target, sources) {
 }
 
 module.exports = assign;
+
 },{}],93:[function(require,module,exports){
 (function (process){
 /**
@@ -9441,6 +9988,7 @@ var PooledClass = {
 };
 
 module.exports = PooledClass;
+
 }).call(this,require('_process'))
 },{"_process":231,"fbjs/lib/invariant":216}],94:[function(require,module,exports){
 /**
@@ -9483,6 +10031,7 @@ React.__SECRET_DOM_DO_NOT_USE_OR_YOU_WILL_BE_FIRED = ReactDOM;
 React.__SECRET_DOM_SERVER_DO_NOT_USE_OR_YOU_WILL_BE_FIRED = ReactDOMServer;
 
 module.exports = React;
+
 },{"./Object.assign":92,"./ReactDOM":105,"./ReactDOMServer":115,"./ReactIsomorphic":133,"./deprecated":178}],95:[function(require,module,exports){
 (function (process){
 /**
@@ -9521,6 +10070,7 @@ var ReactBrowserComponentMixin = {
 };
 
 module.exports = ReactBrowserComponentMixin;
+
 }).call(this,require('_process'))
 },{"./ReactInstanceMap":132,"./findDOMNode":180,"_process":231,"fbjs/lib/warning":227}],96:[function(require,module,exports){
 /**
@@ -9847,6 +10397,7 @@ ReactPerf.measureMethods(ReactBrowserEventEmitter, 'ReactBrowserEventEmitter', {
 });
 
 module.exports = ReactBrowserEventEmitter;
+
 },{"./EventConstants":83,"./EventPluginHub":84,"./EventPluginRegistry":85,"./Object.assign":92,"./ReactEventEmitterMixin":127,"./ReactPerf":142,"./ViewportMetrics":173,"./isEventSupported":191}],97:[function(require,module,exports){
 (function (process){
 /**
@@ -9971,6 +10522,7 @@ var ReactChildReconciler = {
 };
 
 module.exports = ReactChildReconciler;
+
 }).call(this,require('_process'))
 },{"./ReactReconciler":147,"./instantiateReactComponent":190,"./shouldUpdateReactComponent":198,"./traverseAllChildren":199,"_process":231,"fbjs/lib/warning":227}],98:[function(require,module,exports){
 /**
@@ -10155,6 +10707,7 @@ var ReactChildren = {
 };
 
 module.exports = ReactChildren;
+
 },{"./PooledClass":93,"./ReactElement":122,"./traverseAllChildren":199,"fbjs/lib/emptyFunction":208}],99:[function(require,module,exports){
 (function (process){
 /**
@@ -10928,6 +11481,7 @@ var ReactClass = {
 };
 
 module.exports = ReactClass;
+
 }).call(this,require('_process'))
 },{"./Object.assign":92,"./ReactComponent":100,"./ReactElement":122,"./ReactNoopUpdateQueue":140,"./ReactPropTypeLocationNames":143,"./ReactPropTypeLocations":144,"_process":231,"fbjs/lib/emptyObject":209,"fbjs/lib/invariant":216,"fbjs/lib/keyMirror":219,"fbjs/lib/keyOf":220,"fbjs/lib/warning":227}],100:[function(require,module,exports){
 (function (process){
@@ -11053,6 +11607,7 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 module.exports = ReactComponent;
+
 }).call(this,require('_process'))
 },{"./ReactNoopUpdateQueue":140,"./canDefineProperty":176,"_process":231,"fbjs/lib/emptyObject":209,"fbjs/lib/invariant":216,"fbjs/lib/warning":227}],101:[function(require,module,exports){
 /**
@@ -11096,6 +11651,7 @@ var ReactComponentBrowserEnvironment = {
 };
 
 module.exports = ReactComponentBrowserEnvironment;
+
 },{"./ReactDOMIDOperations":110,"./ReactMount":136}],102:[function(require,module,exports){
 (function (process){
 /**
@@ -11149,6 +11705,7 @@ var ReactComponentEnvironment = {
 };
 
 module.exports = ReactComponentEnvironment;
+
 }).call(this,require('_process'))
 },{"_process":231,"fbjs/lib/invariant":216}],103:[function(require,module,exports){
 (function (process){
@@ -11846,6 +12403,7 @@ var ReactCompositeComponent = {
 };
 
 module.exports = ReactCompositeComponent;
+
 }).call(this,require('_process'))
 },{"./Object.assign":92,"./ReactComponentEnvironment":102,"./ReactCurrentOwner":104,"./ReactElement":122,"./ReactInstanceMap":132,"./ReactPerf":142,"./ReactPropTypeLocationNames":143,"./ReactPropTypeLocations":144,"./ReactReconciler":147,"./ReactUpdateQueue":154,"./shouldUpdateReactComponent":198,"_process":231,"fbjs/lib/emptyObject":209,"fbjs/lib/invariant":216,"fbjs/lib/warning":227}],104:[function(require,module,exports){
 /**
@@ -11878,6 +12436,7 @@ var ReactCurrentOwner = {
 };
 
 module.exports = ReactCurrentOwner;
+
 },{}],105:[function(require,module,exports){
 (function (process){
 /**
@@ -11972,6 +12531,7 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 module.exports = React;
+
 }).call(this,require('_process'))
 },{"./ReactCurrentOwner":104,"./ReactDOMTextComponent":116,"./ReactDefaultInjection":119,"./ReactInstanceHandles":131,"./ReactMount":136,"./ReactPerf":142,"./ReactReconciler":147,"./ReactUpdates":155,"./ReactVersion":156,"./findDOMNode":180,"./renderSubtreeIntoContainer":195,"_process":231,"fbjs/lib/ExecutionEnvironment":202,"fbjs/lib/warning":227}],106:[function(require,module,exports){
 /**
@@ -12024,6 +12584,7 @@ var ReactDOMButton = {
 };
 
 module.exports = ReactDOMButton;
+
 },{}],107:[function(require,module,exports){
 (function (process){
 /**
@@ -12988,6 +13549,7 @@ ReactPerf.measureMethods(ReactDOMComponent, 'ReactDOMComponent', {
 assign(ReactDOMComponent.prototype, ReactDOMComponent.Mixin, ReactMultiChild.Mixin);
 
 module.exports = ReactDOMComponent;
+
 }).call(this,require('_process'))
 },{"./AutoFocusUtils":70,"./CSSPropertyOperations":73,"./DOMProperty":78,"./DOMPropertyOperations":79,"./EventConstants":83,"./Object.assign":92,"./ReactBrowserEventEmitter":96,"./ReactComponentBrowserEnvironment":101,"./ReactDOMButton":106,"./ReactDOMInput":111,"./ReactDOMOption":112,"./ReactDOMSelect":113,"./ReactDOMTextarea":117,"./ReactMount":136,"./ReactMultiChild":137,"./ReactPerf":142,"./ReactUpdateQueue":154,"./canDefineProperty":176,"./escapeTextContentForBrowser":179,"./isEventSupported":191,"./setInnerHTML":196,"./setTextContent":197,"./validateDOMNesting":200,"_process":231,"fbjs/lib/invariant":216,"fbjs/lib/keyOf":220,"fbjs/lib/shallowEqual":225,"fbjs/lib/warning":227}],108:[function(require,module,exports){
 (function (process){
@@ -13168,6 +13730,7 @@ var ReactDOMFactories = mapObject({
 }, createDOMFactory);
 
 module.exports = ReactDOMFactories;
+
 }).call(this,require('_process'))
 },{"./ReactElement":122,"./ReactElementValidator":123,"_process":231,"fbjs/lib/mapObject":221}],109:[function(require,module,exports){
 /**
@@ -13188,6 +13751,7 @@ var ReactDOMFeatureFlags = {
 };
 
 module.exports = ReactDOMFeatureFlags;
+
 },{}],110:[function(require,module,exports){
 (function (process){
 /**
@@ -13284,6 +13848,7 @@ ReactPerf.measureMethods(ReactDOMIDOperations, 'ReactDOMIDOperations', {
 });
 
 module.exports = ReactDOMIDOperations;
+
 }).call(this,require('_process'))
 },{"./DOMChildrenOperations":77,"./DOMPropertyOperations":79,"./ReactMount":136,"./ReactPerf":142,"_process":231,"fbjs/lib/invariant":216}],111:[function(require,module,exports){
 (function (process){
@@ -13440,6 +14005,7 @@ function _handleChange(event) {
 }
 
 module.exports = ReactDOMInput;
+
 }).call(this,require('_process'))
 },{"./LinkedValueUtils":91,"./Object.assign":92,"./ReactDOMIDOperations":110,"./ReactMount":136,"./ReactUpdates":155,"_process":231,"fbjs/lib/invariant":216}],112:[function(require,module,exports){
 (function (process){
@@ -13529,6 +14095,7 @@ var ReactDOMOption = {
 };
 
 module.exports = ReactDOMOption;
+
 }).call(this,require('_process'))
 },{"./Object.assign":92,"./ReactChildren":98,"./ReactDOMSelect":113,"_process":231,"fbjs/lib/warning":227}],113:[function(require,module,exports){
 (function (process){
@@ -13720,6 +14287,7 @@ function _handleChange(event) {
 }
 
 module.exports = ReactDOMSelect;
+
 }).call(this,require('_process'))
 },{"./LinkedValueUtils":91,"./Object.assign":92,"./ReactMount":136,"./ReactUpdates":155,"_process":231,"fbjs/lib/warning":227}],114:[function(require,module,exports){
 /**
@@ -13934,6 +14502,7 @@ var ReactDOMSelection = {
 };
 
 module.exports = ReactDOMSelection;
+
 },{"./getNodeForCharacterOffset":188,"./getTextContentAccessor":189,"fbjs/lib/ExecutionEnvironment":202}],115:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -13961,6 +14530,7 @@ var ReactDOMServer = {
 };
 
 module.exports = ReactDOMServer;
+
 },{"./ReactDefaultInjection":119,"./ReactServerRendering":151,"./ReactVersion":156}],116:[function(require,module,exports){
 (function (process){
 /**
@@ -14090,6 +14660,7 @@ assign(ReactDOMTextComponent.prototype, {
 });
 
 module.exports = ReactDOMTextComponent;
+
 }).call(this,require('_process'))
 },{"./DOMChildrenOperations":77,"./DOMPropertyOperations":79,"./Object.assign":92,"./ReactComponentBrowserEnvironment":101,"./ReactMount":136,"./escapeTextContentForBrowser":179,"./setTextContent":197,"./validateDOMNesting":200,"_process":231}],117:[function(require,module,exports){
 (function (process){
@@ -14206,6 +14777,7 @@ function _handleChange(event) {
 }
 
 module.exports = ReactDOMTextarea;
+
 }).call(this,require('_process'))
 },{"./LinkedValueUtils":91,"./Object.assign":92,"./ReactDOMIDOperations":110,"./ReactUpdates":155,"_process":231,"fbjs/lib/invariant":216,"fbjs/lib/warning":227}],118:[function(require,module,exports){
 /**
@@ -14275,6 +14847,7 @@ var ReactDefaultBatchingStrategy = {
 };
 
 module.exports = ReactDefaultBatchingStrategy;
+
 },{"./Object.assign":92,"./ReactUpdates":155,"./Transaction":172,"fbjs/lib/emptyFunction":208}],119:[function(require,module,exports){
 (function (process){
 /**
@@ -14374,6 +14947,7 @@ function inject() {
 module.exports = {
   inject: inject
 };
+
 }).call(this,require('_process'))
 },{"./BeforeInputEventPlugin":71,"./ChangeEventPlugin":75,"./ClientReactRootIndex":76,"./DefaultEventPluginOrder":81,"./EnterLeaveEventPlugin":82,"./HTMLDOMPropertyConfig":89,"./ReactBrowserComponentMixin":95,"./ReactComponentBrowserEnvironment":101,"./ReactDOMComponent":107,"./ReactDOMTextComponent":116,"./ReactDefaultBatchingStrategy":118,"./ReactDefaultPerf":120,"./ReactEventListener":128,"./ReactInjection":129,"./ReactInstanceHandles":131,"./ReactMount":136,"./ReactReconcileTransaction":146,"./SVGDOMPropertyConfig":157,"./SelectEventPlugin":158,"./ServerReactRootIndex":159,"./SimpleEventPlugin":160,"_process":231,"fbjs/lib/ExecutionEnvironment":202}],120:[function(require,module,exports){
 /**
@@ -14613,6 +15187,7 @@ var ReactDefaultPerf = {
 };
 
 module.exports = ReactDefaultPerf;
+
 },{"./DOMProperty":78,"./ReactDefaultPerfAnalysis":121,"./ReactMount":136,"./ReactPerf":142,"fbjs/lib/performanceNow":224}],121:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -14813,6 +15388,7 @@ var ReactDefaultPerfAnalysis = {
 };
 
 module.exports = ReactDefaultPerfAnalysis;
+
 },{"./Object.assign":92}],122:[function(require,module,exports){
 (function (process){
 /**
@@ -15062,6 +15638,7 @@ ReactElement.isValidElement = function (object) {
 };
 
 module.exports = ReactElement;
+
 }).call(this,require('_process'))
 },{"./Object.assign":92,"./ReactCurrentOwner":104,"./canDefineProperty":176,"_process":231}],123:[function(require,module,exports){
 (function (process){
@@ -15346,6 +15923,7 @@ var ReactElementValidator = {
 };
 
 module.exports = ReactElementValidator;
+
 }).call(this,require('_process'))
 },{"./ReactCurrentOwner":104,"./ReactElement":122,"./ReactPropTypeLocationNames":143,"./ReactPropTypeLocations":144,"./canDefineProperty":176,"./getIteratorFn":187,"_process":231,"fbjs/lib/invariant":216,"fbjs/lib/warning":227}],124:[function(require,module,exports){
 /**
@@ -15399,6 +15977,7 @@ assign(ReactEmptyComponent.prototype, {
 ReactEmptyComponent.injection = ReactEmptyComponentInjection;
 
 module.exports = ReactEmptyComponent;
+
 },{"./Object.assign":92,"./ReactElement":122,"./ReactEmptyComponentRegistry":125,"./ReactReconciler":147}],125:[function(require,module,exports){
 /**
  * Copyright 2014-2015, Facebook, Inc.
@@ -15448,6 +16027,7 @@ var ReactEmptyComponentRegistry = {
 };
 
 module.exports = ReactEmptyComponentRegistry;
+
 },{}],126:[function(require,module,exports){
 (function (process){
 /**
@@ -15527,6 +16107,7 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 module.exports = ReactErrorUtils;
+
 }).call(this,require('_process'))
 },{"_process":231}],127:[function(require,module,exports){
 /**
@@ -15567,6 +16148,7 @@ var ReactEventEmitterMixin = {
 };
 
 module.exports = ReactEventEmitterMixin;
+
 },{"./EventPluginHub":84}],128:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -15779,6 +16361,7 @@ var ReactEventListener = {
 };
 
 module.exports = ReactEventListener;
+
 },{"./Object.assign":92,"./PooledClass":93,"./ReactInstanceHandles":131,"./ReactMount":136,"./ReactUpdates":155,"./getEventTarget":186,"fbjs/lib/EventListener":201,"fbjs/lib/ExecutionEnvironment":202,"fbjs/lib/getUnboundedScrollPosition":213}],129:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -15818,6 +16401,7 @@ var ReactInjection = {
 };
 
 module.exports = ReactInjection;
+
 },{"./DOMProperty":78,"./EventPluginHub":84,"./ReactBrowserEventEmitter":96,"./ReactClass":99,"./ReactComponentEnvironment":102,"./ReactEmptyComponent":124,"./ReactNativeComponent":139,"./ReactPerf":142,"./ReactRootIndex":149,"./ReactUpdates":155}],130:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -15943,6 +16527,7 @@ var ReactInputSelection = {
 };
 
 module.exports = ReactInputSelection;
+
 },{"./ReactDOMSelection":114,"fbjs/lib/containsNode":205,"fbjs/lib/focusNode":210,"fbjs/lib/getActiveElement":211}],131:[function(require,module,exports){
 (function (process){
 /**
@@ -16247,6 +16832,7 @@ var ReactInstanceHandles = {
 };
 
 module.exports = ReactInstanceHandles;
+
 }).call(this,require('_process'))
 },{"./ReactRootIndex":149,"_process":231,"fbjs/lib/invariant":216}],132:[function(require,module,exports){
 /**
@@ -16296,6 +16882,7 @@ var ReactInstanceMap = {
 };
 
 module.exports = ReactInstanceMap;
+
 },{}],133:[function(require,module,exports){
 (function (process){
 /**
@@ -16372,6 +16959,7 @@ var React = {
 };
 
 module.exports = React;
+
 }).call(this,require('_process'))
 },{"./Object.assign":92,"./ReactChildren":98,"./ReactClass":99,"./ReactComponent":100,"./ReactDOMFactories":108,"./ReactElement":122,"./ReactElementValidator":123,"./ReactPropTypes":145,"./ReactVersion":156,"./onlyChild":193,"_process":231}],134:[function(require,module,exports){
 /**
@@ -16443,6 +17031,7 @@ ReactLink.PropTypes = {
 };
 
 module.exports = ReactLink;
+
 },{"./React":94}],135:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -16489,6 +17078,7 @@ var ReactMarkupChecksum = {
 };
 
 module.exports = ReactMarkupChecksum;
+
 },{"./adler32":175}],136:[function(require,module,exports){
 (function (process){
 /**
@@ -17341,6 +17931,7 @@ ReactPerf.measureMethods(ReactMount, 'ReactMount', {
 });
 
 module.exports = ReactMount;
+
 }).call(this,require('_process'))
 },{"./DOMProperty":78,"./Object.assign":92,"./ReactBrowserEventEmitter":96,"./ReactCurrentOwner":104,"./ReactDOMFeatureFlags":109,"./ReactElement":122,"./ReactEmptyComponentRegistry":125,"./ReactInstanceHandles":131,"./ReactInstanceMap":132,"./ReactMarkupChecksum":135,"./ReactPerf":142,"./ReactReconciler":147,"./ReactUpdateQueue":154,"./ReactUpdates":155,"./instantiateReactComponent":190,"./setInnerHTML":196,"./shouldUpdateReactComponent":198,"./validateDOMNesting":200,"_process":231,"fbjs/lib/containsNode":205,"fbjs/lib/emptyObject":209,"fbjs/lib/invariant":216,"fbjs/lib/warning":227}],137:[function(require,module,exports){
 (function (process){
@@ -17840,6 +18431,7 @@ var ReactMultiChild = {
 };
 
 module.exports = ReactMultiChild;
+
 }).call(this,require('_process'))
 },{"./ReactChildReconciler":97,"./ReactComponentEnvironment":102,"./ReactCurrentOwner":104,"./ReactMultiChildUpdateTypes":138,"./ReactReconciler":147,"./flattenChildren":181,"_process":231}],138:[function(require,module,exports){
 /**
@@ -17874,6 +18466,7 @@ var ReactMultiChildUpdateTypes = keyMirror({
 });
 
 module.exports = ReactMultiChildUpdateTypes;
+
 },{"fbjs/lib/keyMirror":219}],139:[function(require,module,exports){
 (function (process){
 /**
@@ -17970,6 +18563,7 @@ var ReactNativeComponent = {
 };
 
 module.exports = ReactNativeComponent;
+
 }).call(this,require('_process'))
 },{"./Object.assign":92,"_process":231,"fbjs/lib/invariant":216}],140:[function(require,module,exports){
 (function (process){
@@ -18091,6 +18685,7 @@ var ReactNoopUpdateQueue = {
 };
 
 module.exports = ReactNoopUpdateQueue;
+
 }).call(this,require('_process'))
 },{"_process":231,"fbjs/lib/warning":227}],141:[function(require,module,exports){
 (function (process){
@@ -18185,6 +18780,7 @@ var ReactOwner = {
 };
 
 module.exports = ReactOwner;
+
 }).call(this,require('_process'))
 },{"_process":231,"fbjs/lib/invariant":216}],142:[function(require,module,exports){
 (function (process){
@@ -18284,6 +18880,7 @@ function _noMeasure(objName, fnName, func) {
 }
 
 module.exports = ReactPerf;
+
 }).call(this,require('_process'))
 },{"_process":231}],143:[function(require,module,exports){
 (function (process){
@@ -18311,6 +18908,7 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 module.exports = ReactPropTypeLocationNames;
+
 }).call(this,require('_process'))
 },{"_process":231}],144:[function(require,module,exports){
 /**
@@ -18335,6 +18933,7 @@ var ReactPropTypeLocations = keyMirror({
 });
 
 module.exports = ReactPropTypeLocations;
+
 },{"fbjs/lib/keyMirror":219}],145:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -18692,6 +19291,7 @@ function getClassName(propValue) {
 }
 
 module.exports = ReactPropTypes;
+
 },{"./ReactElement":122,"./ReactPropTypeLocationNames":143,"./getIteratorFn":187,"fbjs/lib/emptyFunction":208}],146:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -18844,6 +19444,7 @@ assign(ReactReconcileTransaction.prototype, Transaction.Mixin, Mixin);
 PooledClass.addPoolingTo(ReactReconcileTransaction);
 
 module.exports = ReactReconcileTransaction;
+
 },{"./CallbackQueue":74,"./Object.assign":92,"./PooledClass":93,"./ReactBrowserEventEmitter":96,"./ReactDOMFeatureFlags":109,"./ReactInputSelection":130,"./Transaction":172}],147:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -18952,6 +19553,7 @@ var ReactReconciler = {
 };
 
 module.exports = ReactReconciler;
+
 },{"./ReactRef":148}],148:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -19031,6 +19633,7 @@ ReactRef.detachRefs = function (instance, element) {
 };
 
 module.exports = ReactRef;
+
 },{"./ReactOwner":141}],149:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -19061,6 +19664,7 @@ var ReactRootIndex = {
 };
 
 module.exports = ReactRootIndex;
+
 },{}],150:[function(require,module,exports){
 /**
  * Copyright 2014-2015, Facebook, Inc.
@@ -19085,6 +19689,7 @@ var ReactServerBatchingStrategy = {
 };
 
 module.exports = ReactServerBatchingStrategy;
+
 },{}],151:[function(require,module,exports){
 (function (process){
 /**
@@ -19170,6 +19775,7 @@ module.exports = {
   renderToString: renderToString,
   renderToStaticMarkup: renderToStaticMarkup
 };
+
 }).call(this,require('_process'))
 },{"./ReactDefaultBatchingStrategy":118,"./ReactElement":122,"./ReactInstanceHandles":131,"./ReactMarkupChecksum":135,"./ReactServerBatchingStrategy":150,"./ReactServerRenderingTransaction":152,"./ReactUpdates":155,"./instantiateReactComponent":190,"_process":231,"fbjs/lib/emptyObject":209,"fbjs/lib/invariant":216}],152:[function(require,module,exports){
 /**
@@ -19259,6 +19865,7 @@ assign(ReactServerRenderingTransaction.prototype, Transaction.Mixin, Mixin);
 PooledClass.addPoolingTo(ReactServerRenderingTransaction);
 
 module.exports = ReactServerRenderingTransaction;
+
 },{"./CallbackQueue":74,"./Object.assign":92,"./PooledClass":93,"./Transaction":172,"fbjs/lib/emptyFunction":208}],153:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -19364,6 +19971,7 @@ ReactStateSetters.Mixin = {
 };
 
 module.exports = ReactStateSetters;
+
 },{}],154:[function(require,module,exports){
 (function (process){
 /**
@@ -19623,6 +20231,7 @@ var ReactUpdateQueue = {
 };
 
 module.exports = ReactUpdateQueue;
+
 }).call(this,require('_process'))
 },{"./Object.assign":92,"./ReactCurrentOwner":104,"./ReactElement":122,"./ReactInstanceMap":132,"./ReactUpdates":155,"_process":231,"fbjs/lib/invariant":216,"fbjs/lib/warning":227}],155:[function(require,module,exports){
 (function (process){
@@ -19849,6 +20458,7 @@ var ReactUpdates = {
 };
 
 module.exports = ReactUpdates;
+
 }).call(this,require('_process'))
 },{"./CallbackQueue":74,"./Object.assign":92,"./PooledClass":93,"./ReactPerf":142,"./ReactReconciler":147,"./Transaction":172,"_process":231,"fbjs/lib/invariant":216}],156:[function(require,module,exports){
 /**
@@ -19865,6 +20475,7 @@ module.exports = ReactUpdates;
 'use strict';
 
 module.exports = '0.14.3';
+
 },{}],157:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -19993,6 +20604,7 @@ var SVGDOMPropertyConfig = {
 };
 
 module.exports = SVGDOMPropertyConfig;
+
 },{"./DOMProperty":78}],158:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -20195,6 +20807,7 @@ var SelectEventPlugin = {
 };
 
 module.exports = SelectEventPlugin;
+
 },{"./EventConstants":83,"./EventPropagators":87,"./ReactInputSelection":130,"./SyntheticEvent":164,"./isTextInputElement":192,"fbjs/lib/ExecutionEnvironment":202,"fbjs/lib/getActiveElement":211,"fbjs/lib/keyOf":220,"fbjs/lib/shallowEqual":225}],159:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -20225,6 +20838,7 @@ var ServerReactRootIndex = {
 };
 
 module.exports = ServerReactRootIndex;
+
 },{}],160:[function(require,module,exports){
 (function (process){
 /**
@@ -20814,6 +21428,7 @@ var SimpleEventPlugin = {
 };
 
 module.exports = SimpleEventPlugin;
+
 }).call(this,require('_process'))
 },{"./EventConstants":83,"./EventPropagators":87,"./ReactMount":136,"./SyntheticClipboardEvent":161,"./SyntheticDragEvent":163,"./SyntheticEvent":164,"./SyntheticFocusEvent":165,"./SyntheticKeyboardEvent":167,"./SyntheticMouseEvent":168,"./SyntheticTouchEvent":169,"./SyntheticUIEvent":170,"./SyntheticWheelEvent":171,"./getEventCharCode":183,"_process":231,"fbjs/lib/EventListener":201,"fbjs/lib/emptyFunction":208,"fbjs/lib/invariant":216,"fbjs/lib/keyOf":220}],161:[function(require,module,exports){
 /**
@@ -20855,6 +21470,7 @@ function SyntheticClipboardEvent(dispatchConfig, dispatchMarker, nativeEvent, na
 SyntheticEvent.augmentClass(SyntheticClipboardEvent, ClipboardEventInterface);
 
 module.exports = SyntheticClipboardEvent;
+
 },{"./SyntheticEvent":164}],162:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -20893,6 +21509,7 @@ function SyntheticCompositionEvent(dispatchConfig, dispatchMarker, nativeEvent, 
 SyntheticEvent.augmentClass(SyntheticCompositionEvent, CompositionEventInterface);
 
 module.exports = SyntheticCompositionEvent;
+
 },{"./SyntheticEvent":164}],163:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -20931,6 +21548,7 @@ function SyntheticDragEvent(dispatchConfig, dispatchMarker, nativeEvent, nativeE
 SyntheticMouseEvent.augmentClass(SyntheticDragEvent, DragEventInterface);
 
 module.exports = SyntheticDragEvent;
+
 },{"./SyntheticMouseEvent":168}],164:[function(require,module,exports){
 (function (process){
 /**
@@ -21110,6 +21728,7 @@ SyntheticEvent.augmentClass = function (Class, Interface) {
 PooledClass.addPoolingTo(SyntheticEvent, PooledClass.fourArgumentPooler);
 
 module.exports = SyntheticEvent;
+
 }).call(this,require('_process'))
 },{"./Object.assign":92,"./PooledClass":93,"_process":231,"fbjs/lib/emptyFunction":208,"fbjs/lib/warning":227}],165:[function(require,module,exports){
 /**
@@ -21149,6 +21768,7 @@ function SyntheticFocusEvent(dispatchConfig, dispatchMarker, nativeEvent, native
 SyntheticUIEvent.augmentClass(SyntheticFocusEvent, FocusEventInterface);
 
 module.exports = SyntheticFocusEvent;
+
 },{"./SyntheticUIEvent":170}],166:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -21188,6 +21808,7 @@ function SyntheticInputEvent(dispatchConfig, dispatchMarker, nativeEvent, native
 SyntheticEvent.augmentClass(SyntheticInputEvent, InputEventInterface);
 
 module.exports = SyntheticInputEvent;
+
 },{"./SyntheticEvent":164}],167:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -21274,6 +21895,7 @@ function SyntheticKeyboardEvent(dispatchConfig, dispatchMarker, nativeEvent, nat
 SyntheticUIEvent.augmentClass(SyntheticKeyboardEvent, KeyboardEventInterface);
 
 module.exports = SyntheticKeyboardEvent;
+
 },{"./SyntheticUIEvent":170,"./getEventCharCode":183,"./getEventKey":184,"./getEventModifierState":185}],168:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -21348,6 +21970,7 @@ function SyntheticMouseEvent(dispatchConfig, dispatchMarker, nativeEvent, native
 SyntheticUIEvent.augmentClass(SyntheticMouseEvent, MouseEventInterface);
 
 module.exports = SyntheticMouseEvent;
+
 },{"./SyntheticUIEvent":170,"./ViewportMetrics":173,"./getEventModifierState":185}],169:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -21395,6 +22018,7 @@ function SyntheticTouchEvent(dispatchConfig, dispatchMarker, nativeEvent, native
 SyntheticUIEvent.augmentClass(SyntheticTouchEvent, TouchEventInterface);
 
 module.exports = SyntheticTouchEvent;
+
 },{"./SyntheticUIEvent":170,"./getEventModifierState":185}],170:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -21456,6 +22080,7 @@ function SyntheticUIEvent(dispatchConfig, dispatchMarker, nativeEvent, nativeEve
 SyntheticEvent.augmentClass(SyntheticUIEvent, UIEventInterface);
 
 module.exports = SyntheticUIEvent;
+
 },{"./SyntheticEvent":164,"./getEventTarget":186}],171:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -21512,6 +22137,7 @@ function SyntheticWheelEvent(dispatchConfig, dispatchMarker, nativeEvent, native
 SyntheticMouseEvent.augmentClass(SyntheticWheelEvent, WheelEventInterface);
 
 module.exports = SyntheticWheelEvent;
+
 },{"./SyntheticMouseEvent":168}],172:[function(require,module,exports){
 (function (process){
 /**
@@ -21745,6 +22371,7 @@ var Transaction = {
 };
 
 module.exports = Transaction;
+
 }).call(this,require('_process'))
 },{"_process":231,"fbjs/lib/invariant":216}],173:[function(require,module,exports){
 /**
@@ -21774,6 +22401,7 @@ var ViewportMetrics = {
 };
 
 module.exports = ViewportMetrics;
+
 },{}],174:[function(require,module,exports){
 (function (process){
 /**
@@ -21835,6 +22463,7 @@ function accumulateInto(current, next) {
 }
 
 module.exports = accumulateInto;
+
 }).call(this,require('_process'))
 },{"_process":231,"fbjs/lib/invariant":216}],175:[function(require,module,exports){
 /**
@@ -21879,6 +22508,7 @@ function adler32(data) {
 }
 
 module.exports = adler32;
+
 },{}],176:[function(require,module,exports){
 (function (process){
 /**
@@ -21905,6 +22535,7 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 module.exports = canDefineProperty;
+
 }).call(this,require('_process'))
 },{"_process":231}],177:[function(require,module,exports){
 /**
@@ -21962,6 +22593,7 @@ function dangerousStyleValue(name, value) {
 }
 
 module.exports = dangerousStyleValue;
+
 },{"./CSSProperty":72}],178:[function(require,module,exports){
 (function (process){
 /**
@@ -22012,6 +22644,7 @@ function deprecated(fnName, newModule, newPackage, ctx, fn) {
 }
 
 module.exports = deprecated;
+
 }).call(this,require('_process'))
 },{"./Object.assign":92,"_process":231,"fbjs/lib/warning":227}],179:[function(require,module,exports){
 /**
@@ -22052,6 +22685,7 @@ function escapeTextContentForBrowser(text) {
 }
 
 module.exports = escapeTextContentForBrowser;
+
 },{}],180:[function(require,module,exports){
 (function (process){
 /**
@@ -22103,6 +22737,7 @@ function findDOMNode(componentOrElement) {
 }
 
 module.exports = findDOMNode;
+
 }).call(this,require('_process'))
 },{"./ReactCurrentOwner":104,"./ReactInstanceMap":132,"./ReactMount":136,"_process":231,"fbjs/lib/invariant":216,"fbjs/lib/warning":227}],181:[function(require,module,exports){
 (function (process){
@@ -22154,6 +22789,7 @@ function flattenChildren(children) {
 }
 
 module.exports = flattenChildren;
+
 }).call(this,require('_process'))
 },{"./traverseAllChildren":199,"_process":231,"fbjs/lib/warning":227}],182:[function(require,module,exports){
 /**
@@ -22185,6 +22821,7 @@ var forEachAccumulated = function (arr, cb, scope) {
 };
 
 module.exports = forEachAccumulated;
+
 },{}],183:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -22236,6 +22873,7 @@ function getEventCharCode(nativeEvent) {
 }
 
 module.exports = getEventCharCode;
+
 },{}],184:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -22340,6 +22978,7 @@ function getEventKey(nativeEvent) {
 }
 
 module.exports = getEventKey;
+
 },{"./getEventCharCode":183}],185:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -22385,6 +23024,7 @@ function getEventModifierState(nativeEvent) {
 }
 
 module.exports = getEventModifierState;
+
 },{}],186:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -22415,6 +23055,7 @@ function getEventTarget(nativeEvent) {
 }
 
 module.exports = getEventTarget;
+
 },{}],187:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -22456,6 +23097,7 @@ function getIteratorFn(maybeIterable) {
 }
 
 module.exports = getIteratorFn;
+
 },{}],188:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -22530,6 +23172,7 @@ function getNodeForCharacterOffset(root, offset) {
 }
 
 module.exports = getNodeForCharacterOffset;
+
 },{}],189:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -22564,6 +23207,7 @@ function getTextContentAccessor() {
 }
 
 module.exports = getTextContentAccessor;
+
 },{"fbjs/lib/ExecutionEnvironment":202}],190:[function(require,module,exports){
 (function (process){
 /**
@@ -22678,6 +23322,7 @@ function instantiateReactComponent(node) {
 }
 
 module.exports = instantiateReactComponent;
+
 }).call(this,require('_process'))
 },{"./Object.assign":92,"./ReactCompositeComponent":103,"./ReactEmptyComponent":124,"./ReactNativeComponent":139,"_process":231,"fbjs/lib/invariant":216,"fbjs/lib/warning":227}],191:[function(require,module,exports){
 /**
@@ -22740,6 +23385,7 @@ function isEventSupported(eventNameSuffix, capture) {
 }
 
 module.exports = isEventSupported;
+
 },{"fbjs/lib/ExecutionEnvironment":202}],192:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -22781,6 +23427,7 @@ function isTextInputElement(elem) {
 }
 
 module.exports = isTextInputElement;
+
 },{}],193:[function(require,module,exports){
 (function (process){
 /**
@@ -22816,6 +23463,7 @@ function onlyChild(children) {
 }
 
 module.exports = onlyChild;
+
 }).call(this,require('_process'))
 },{"./ReactElement":122,"_process":231,"fbjs/lib/invariant":216}],194:[function(require,module,exports){
 /**
@@ -22844,6 +23492,7 @@ function quoteAttributeValueForBrowser(value) {
 }
 
 module.exports = quoteAttributeValueForBrowser;
+
 },{"./escapeTextContentForBrowser":179}],195:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -22861,6 +23510,7 @@ module.exports = quoteAttributeValueForBrowser;
 var ReactMount = require('./ReactMount');
 
 module.exports = ReactMount.renderSubtreeIntoContainer;
+
 },{"./ReactMount":136}],196:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -22952,6 +23602,7 @@ if (ExecutionEnvironment.canUseDOM) {
 }
 
 module.exports = setInnerHTML;
+
 },{"fbjs/lib/ExecutionEnvironment":202}],197:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -22993,6 +23644,7 @@ if (ExecutionEnvironment.canUseDOM) {
 }
 
 module.exports = setTextContent;
+
 },{"./escapeTextContentForBrowser":179,"./setInnerHTML":196,"fbjs/lib/ExecutionEnvironment":202}],198:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -23037,6 +23689,7 @@ function shouldUpdateReactComponent(prevElement, nextElement) {
 }
 
 module.exports = shouldUpdateReactComponent;
+
 },{}],199:[function(require,module,exports){
 (function (process){
 /**
@@ -23228,6 +23881,7 @@ function traverseAllChildren(children, callback, traverseContext) {
 }
 
 module.exports = traverseAllChildren;
+
 }).call(this,require('_process'))
 },{"./ReactCurrentOwner":104,"./ReactElement":122,"./ReactInstanceHandles":131,"./getIteratorFn":187,"_process":231,"fbjs/lib/invariant":216,"fbjs/lib/warning":227}],200:[function(require,module,exports){
 (function (process){
@@ -23594,6 +24248,7 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 module.exports = validateDOMNesting;
+
 }).call(this,require('_process'))
 },{"./Object.assign":92,"_process":231,"fbjs/lib/emptyFunction":208,"fbjs/lib/warning":227}],201:[function(require,module,exports){
 (function (process){
@@ -23681,6 +24336,7 @@ var EventListener = {
 };
 
 module.exports = EventListener;
+
 }).call(this,require('_process'))
 },{"./emptyFunction":208,"_process":231}],202:[function(require,module,exports){
 /**
@@ -23719,6 +24375,7 @@ var ExecutionEnvironment = {
 };
 
 module.exports = ExecutionEnvironment;
+
 },{}],203:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -23752,6 +24409,7 @@ function camelize(string) {
 }
 
 module.exports = camelize;
+
 },{}],204:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -23793,6 +24451,7 @@ function camelizeStyleName(string) {
 }
 
 module.exports = camelizeStyleName;
+
 },{"./camelize":203}],205:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -23849,6 +24508,7 @@ function containsNode(_x, _x2) {
 }
 
 module.exports = containsNode;
+
 },{"./isTextNode":218}],206:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -23935,6 +24595,7 @@ function createArrayFromMixed(obj) {
 }
 
 module.exports = createArrayFromMixed;
+
 },{"./toArray":226}],207:[function(require,module,exports){
 (function (process){
 /**
@@ -24021,6 +24682,7 @@ function createNodesFromMarkup(markup, handleScript) {
 }
 
 module.exports = createNodesFromMarkup;
+
 }).call(this,require('_process'))
 },{"./ExecutionEnvironment":202,"./createArrayFromMixed":206,"./getMarkupWrap":212,"./invariant":216,"_process":231}],208:[function(require,module,exports){
 /**
@@ -24061,6 +24723,7 @@ emptyFunction.thatReturnsArgument = function (arg) {
 };
 
 module.exports = emptyFunction;
+
 },{}],209:[function(require,module,exports){
 (function (process){
 /**
@@ -24083,6 +24746,7 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 module.exports = emptyObject;
+
 }).call(this,require('_process'))
 },{"_process":231}],210:[function(require,module,exports){
 /**
@@ -24111,6 +24775,7 @@ function focusNode(node) {
 }
 
 module.exports = focusNode;
+
 },{}],211:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -24145,6 +24810,7 @@ function getActiveElement() /*?DOMElement*/{
 }
 
 module.exports = getActiveElement;
+
 },{}],212:[function(require,module,exports){
 (function (process){
 /**
@@ -24242,6 +24908,7 @@ function getMarkupWrap(nodeName) {
 }
 
 module.exports = getMarkupWrap;
+
 }).call(this,require('_process'))
 },{"./ExecutionEnvironment":202,"./invariant":216,"_process":231}],213:[function(require,module,exports){
 /**
@@ -24282,6 +24949,7 @@ function getUnboundedScrollPosition(scrollable) {
 }
 
 module.exports = getUnboundedScrollPosition;
+
 },{}],214:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -24316,6 +24984,7 @@ function hyphenate(string) {
 }
 
 module.exports = hyphenate;
+
 },{}],215:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -24356,6 +25025,7 @@ function hyphenateStyleName(string) {
 }
 
 module.exports = hyphenateStyleName;
+
 },{"./hyphenate":214}],216:[function(require,module,exports){
 (function (process){
 /**
@@ -24407,6 +25077,7 @@ var invariant = function (condition, format, a, b, c, d, e, f) {
 };
 
 module.exports = invariant;
+
 }).call(this,require('_process'))
 },{"_process":231}],217:[function(require,module,exports){
 /**
@@ -24432,6 +25103,7 @@ function isNode(object) {
 }
 
 module.exports = isNode;
+
 },{}],218:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -24458,6 +25130,7 @@ function isTextNode(object) {
 }
 
 module.exports = isTextNode;
+
 },{"./isNode":217}],219:[function(require,module,exports){
 (function (process){
 /**
@@ -24508,6 +25181,7 @@ var keyMirror = function (obj) {
 };
 
 module.exports = keyMirror;
+
 }).call(this,require('_process'))
 },{"./invariant":216,"_process":231}],220:[function(require,module,exports){
 /**
@@ -24545,6 +25219,7 @@ var keyOf = function (oneKeyObj) {
 };
 
 module.exports = keyOf;
+
 },{}],221:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -24597,6 +25272,7 @@ function mapObject(object, callback, context) {
 }
 
 module.exports = mapObject;
+
 },{}],222:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -24629,6 +25305,7 @@ function memoizeStringOnly(callback) {
 }
 
 module.exports = memoizeStringOnly;
+
 },{}],223:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -24653,6 +25330,7 @@ if (ExecutionEnvironment.canUseDOM) {
 }
 
 module.exports = performance || {};
+
 },{"./ExecutionEnvironment":202}],224:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -24683,6 +25361,7 @@ if (!curPerformance || !curPerformance.now) {
 var performanceNow = curPerformance.now.bind(curPerformance);
 
 module.exports = performanceNow;
+
 },{"./performance":223}],225:[function(require,module,exports){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -24734,6 +25413,7 @@ function shallowEqual(objA, objB) {
 }
 
 module.exports = shallowEqual;
+
 },{}],226:[function(require,module,exports){
 (function (process){
 /**
@@ -24793,6 +25473,7 @@ function toArray(obj) {
 }
 
 module.exports = toArray;
+
 }).call(this,require('_process'))
 },{"./invariant":216,"_process":231}],227:[function(require,module,exports){
 (function (process){
@@ -24853,6 +25534,7 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 module.exports = warning;
+
 }).call(this,require('_process'))
 },{"./emptyFunction":208,"_process":231}],228:[function(require,module,exports){
 'use strict';
@@ -24865,82 +25547,83 @@ var EventEmitter = require('events').EventEmitter;
 var IngredientConsants = require('../constants/ingredient_constants');
 var extend = require('extend');
 
+
 // Constants for Ingredient Store
 
-var ALL_INGREDIENTS_CHANGE = "ALL_INGREDIENTS_CHANGE";
-var INGREDIENT_SEARCH = "INGREDIENT_SEARCH";
 
-// Private variables to store ingredient list and type
-var _ingredients = [];
-var _filteredIngredients = [];
+  var ALL_INGREDIENTS_CHANGE = "ALL_INGREDIENTS_CHANGE";
+  var INGREDIENT_SEARCH = "INGREDIENT_SEARCH";
 
-var _updateIngredients = function (payload) {
-  _ingredients = payload;
-  IngredientStore.emit(ALL_INGREDIENTS_CHANGE);
-};
+  // Private variables to store ingredient list and type
+  var _ingredients = [];
+  var _filteredIngredients = [];
 
-var _reset = function () {
-  _ingredients = [];
-  _filteredIngredients = [];
-};
-
-var _filterIngredients = function (string) {
-  // Make sure arg is of string type for a proper search
-  if (typeof string !== 'string') {
-    throw new TypeError("Filter param must be string");
-  }
-  // Check case when string is empty, in which case emit an event
-  // so list queries all ingredients
-  if (string.length == 0) {
+  var _updateIngredients = function(payload) {
+    _ingredients = payload;
     IngredientStore.emit(ALL_INGREDIENTS_CHANGE);
-  } else {
-    _filteredIngredients = _ingredients.filter(function (ing) {
-      return ing.name.match(string);
-    });
-    IngredientStore.emit(INGREDIENT_SEARCH);
-  }
-};
-module.exports = IngredientStore = extend({}, EventEmitter.prototype, {
-  allIngredients: function () {
-    return _ingredients;
-  },
+  };
 
-  searchIngredients: function () {
-    return _filteredIngredients;
-  },
+  var _reset = function() {
+    _ingredients = [];
+    _filteredIngredients = [];
+  };
 
-  addAllIngredientChangeListener: function (listener) {
-    this.addListener(ALL_INGREDIENTS_CHANGE, listener);
-  },
-
-  removeAllIngredientChangeListener: function (listener) {
-    _reset();
-    this.removeListener(ALL_INGREDIENTS_CHANGE, listener);
-  },
-
-  addSearchChangeListener: function (listener) {
-    this.addListener(INGREDIENT_SEARCH, listener);
-  },
-
-  removeSearchChangeListener: function (listener) {
-    _reset();
-    this.removeListener(INGREDIENT_SEARCH, listener);
-  },
-
-  dispatcerId: AppDispatcher.register(function (action) {
-    switch (action.actionType) {
-      case IngredientConsants.INGREDIENTS_RECIEVED:
-        _updateIngredients(action.payload);
-        break;
-      case IngredientConsants.INGREDIENT_SEARCH:
-        _filterIngredients(action.payload);
-        break;
-      default:
-        break;
+  var _filterIngredients = function(string) {
+    // Make sure arg is of string type for a proper search
+    if (typeof string !== 'string') {
+      throw new TypeError("Filter param must be string");
     }
-  })
+    // Check case when string is empty, in which case emit an event 
+    // so list queries all ingredients 
+    if (string.length == 0) {
+      IngredientStore.emit(ALL_INGREDIENTS_CHANGE);
+    } else {
+      _filteredIngredients = 
+        _ingredients.filter(function(ing){ return ing.name.match(string)});
+      IngredientStore.emit(INGREDIENT_SEARCH);    
+    }
+  };
+  module.exports = IngredientStore = extend({}, EventEmitter.prototype,{
+    allIngredients: function() {
+      return _ingredients;
+    },
 
-});
+    searchIngredients: function() {
+      return _filteredIngredients;
+    },
+
+    addAllIngredientChangeListener: function(listener){
+      this.addListener(ALL_INGREDIENTS_CHANGE, listener);
+    },
+
+    removeAllIngredientChangeListener: function(listener){
+      _reset();
+      this.removeListener(ALL_INGREDIENTS_CHANGE, listener);
+    },
+
+    addSearchChangeListener: function(listener){
+      this.addListener(INGREDIENT_SEARCH, listener);
+    },
+
+    removeSearchChangeListener: function(listener){
+      _reset();
+      this.removeListener(INGREDIENT_SEARCH, listener);
+    },
+
+    dispatcerId: AppDispatcher.register(function(action){
+      switch(action.actionType) {
+        case IngredientConsants.INGREDIENTS_RECIEVED:
+          _updateIngredients(action.payload);
+          break;
+        case IngredientConsants.INGREDIENT_SEARCH:
+          _filterIngredients(action.payload);
+          break;
+        default:
+          break;
+      }
+    })
+
+  });
 
 },{"../constants/ingredient_constants":11,"../dispatcher/dispatcher":12,"events":230,"extend":13}],230:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.

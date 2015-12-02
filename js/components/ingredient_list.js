@@ -14,7 +14,7 @@ module.exports = IngredientList = React.createClass({
   _renderItem: function() {
     var addIngredient, Ingredient;
     if (!this.props.readOnly) {
-      // Editable 
+      // Editable State with handelers 
       addIngredient = (
         <div className='add-ingredient'>
             <a onClick={this.props.handleClick.bind(null, this.props.type)}>
@@ -39,7 +39,7 @@ module.exports = IngredientList = React.createClass({
         );
 
     } else {
-      //ReadOnly
+      //ReadOnly state without handelers 
       addIngredient = ("");
       Ingredient = (
         <div>

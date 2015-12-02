@@ -8,6 +8,7 @@ var LinkedState = require('react-addons-linked-state-mixin');
 module.exports = BeerRecipe = React.createClass({
   mixins: [LinkedState],
   getInitialState: function() {
+    // Keep statful variables representing what a recipe has 
     return ({
       name: "",
       type: "",
@@ -89,6 +90,7 @@ module.exports = BeerRecipe = React.createClass({
   },
 
   _renderHeader: function() {
+    // Check for an empty title and if so, return untitled 
     var title = (this.state.name == "") ? "Untitled Recipe" : this.state.name;
     var header;
     header = (
@@ -109,6 +111,8 @@ module.exports = BeerRecipe = React.createClass({
   },
 
   _renderLibraryModal: function(type, e) {
+    // When activated, store modal library compoenent in instance variable and 
+    // pass to it appropriate type and ingredients
     this.modal = <IngredientLibrary 
     deleteIngredient={this._handleDelete} 
     addIngredient={this._addIngredient} 
@@ -119,6 +123,7 @@ module.exports = BeerRecipe = React.createClass({
   },
 
   _closeModal: function() {
+    // Set state to false and instance variable to empty
     this.modal = "";
     this.setState({ modal: false})
   },
@@ -127,6 +132,8 @@ module.exports = BeerRecipe = React.createClass({
     var errors = this._validateForm();
     // Client Side Validation of form fields returns errors if any
     if (errors.length == 0) {
+      // Only proceed to create new recipe object if no errors are returned 
+      // from form valiation
       var recipe = {
         name: this.state.name,
         type: this.state.type,
@@ -148,6 +155,13 @@ module.exports = BeerRecipe = React.createClass({
   },
 
   _handleAmountChange: function(e, ingredient, change) {
+    // This function handles changing the amount/unit of each ingredient 
+    // Nested form components in IngredientItem handle changes by
+    // recieving this function with a  binding to the correct object
+    // 
+    // Once called, I just change the binded refrence to the correct amount/unit 
+    // and force a rerender of the state without having to traverse the ingredient 
+    // array to find the correct object 
     if (change.amount) {
       ingredient.amount = e.target.value;
     } else {
@@ -175,11 +189,12 @@ module.exports = BeerRecipe = React.createClass({
   },
 
   _addIngredient: function(type, ingredient) {
-    // Only add ingredient if not already in the list
     var names = this.state[type].map(function(ing) { return ing.name; });
+    // Bind type upon handler assignment and use that type to find correct ingredients array
     if (names.indexOf(ingredient.name) === -1) {
-      var items = this.state[type].concat(ingredient);
-      var newItems = {};
+      // Check if the added ingredient.name is in the current names array
+      // and if update state and rerender
+      var items = this.state[type].concat(ingredient), newItems = {}; 
       newItems[type] = items;
       this.modal = <IngredientLibrary 
            deleteIngredient={this._handleDelete} 
@@ -187,14 +202,15 @@ module.exports = BeerRecipe = React.createClass({
             selectedIngredients={newItems[type]}
             type={type} 
             closeModal={this._closeModal} />
-            console.log(newItems);
       this.setState(newItems); 
     }
   },
 
   _handleDelete: function(type, ingredient, e) {
     var items = this.state[type]
+    // Use binded type to again select the correct ingredients array
     var newItems = items.filter(function(ing){
+      //Use the passed in ingredient to filter out
       return ing.name !== ingredient.name;
     });
     var newState = {};

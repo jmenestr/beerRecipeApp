@@ -7,6 +7,7 @@ module.exports = Errors = React.createClass({
     return (
       <div className='errors'>
         <ul>
+        // Generate errors list based on props.errors
           {this.props.errors.map(function(error){
             return (<li key={error}>{error}</li>);
           })}

@@ -1,0 +1,374 @@
+/* Reset */
+html, body, div, span, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+abbr, address, cite, code,
+del, dfn, em, img, ins, kbd, q, samp,
+small, strong, sub, sup, var,
+b, i,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section, summary,
+time, mark, audio, video {
+    margin:0;
+    padding:0;
+    border:0;
+    outline:0;
+    vertical-align:baseline;
+    background:transparent;
+}
+
+/* General Styles */
+
+body {
+  font-family: 'Roboto', sans-serif;
+}
+
+.cf:after {
+  content: "";
+  display: block;
+  clear:both;
+}
+
+.thumb {
+  max-width: 100%;
+}
+button {
+  border: none;
+  background: none;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+button.warning {
+  color: #b55002;
+  font-size: 1.5em;
+
+}
+
+.warning:hover {
+  color: #f5f5f0;
+  box-shadow: 0px 0px 5px #b55002;
+  background: #b55002;
+}
+.fade {
+    transition: color 450ms ease-in-out, 
+    background-color 150ms ease-in-out;
+}
+
+
+
+.remove {
+  float: right;
+  font-size: 1.5em;
+  position: relative;
+  top: -2%;
+  font-weight: bold;
+  height:30px;
+  width:30px;
+  border-radius: 2px;
+  box-shadow: 0px 0px 5px #e0e0e0;
+}
+
+h1 {
+  font-size: 3em; 
+}
+
+h2 {
+  font-size: 2.25em;
+  color: #b55002;
+  margin-bottom: 2%;
+}
+
+h3, .form-group label {
+  text-transform: capitalize;
+  font-size: 1.75em;
+  font-weight: 400;
+  color: #b55002;
+}
+
+input {
+  border: 1px solid #e0e0e0;
+  border-radius: 5px;
+  box-shadow: 0 0 5px #e0e0e0;
+}
+
+.form-group {
+  display: inline-block;
+  margin: 2% 0;
+  width: 100%;
+  vertical-align: middle;
+}
+
+.library, .recipe {
+    min-width: 950px;
+    position: absolute;
+    z-index: 1000;
+    top: 5%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 85%;
+    background: white;
+    border-radius: 5px;
+  }
+
+  .left { float: left; width: 50%;}
+  .right { float: right; width: 50%;}
+
+/* Modal List */
+
+  .modal.is-active {
+    display: block;
+  }
+  .modal-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 999;
+    background: rgba(0,0,0, 0.8);
+  }
+
+  .modal-close {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 15px;
+    height: 40px;
+    width: 40px;
+    font-size: 2em;
+     cursor: pointer;
+  }
+
+/* Errors and Success */
+
+.errors {
+  background: #e4b9b9;
+  border-bottom: 2px solid #d69494;
+  box-shadow: 0px 0px 15px #666;
+  padding: 3%;
+  font-size: 1.25em;
+}
+
+.success {
+  background: #02b514;
+  padding: 2%;
+  margin: 2% 0;
+  box-shadow: 0 0 5px #666;
+}
+
+.success h3 {
+  color: #f5f5f0;
+}
+
+.errors li {
+  padding: 1% 0;
+}
+/* Heading Styles */
+
+.header {
+  padding: 2%;
+  color: #b55002;
+  background: #F5F5EF;
+  position: relative;
+  text-transform: capitalize;
+  box-shadow: 0px 0px 10px #666;
+}
+
+.header .logo {
+  float: left;
+  display: inline;
+  height: 100%;
+  width: 10%;
+}
+
+.header .header-text {
+  float:left;
+  font-weight: lighter;
+  font-style: 1.5em;
+  margin-left: 5%;
+  vertical-align: middle;
+}
+
+.header .save  {
+  float: right;
+  position: absolute;
+  top: 50%;
+  right: 6%;
+  width: 25%;
+  font-size: 1.25em;
+  color: #b55002;
+  border: 2px solid white;
+  cursor: pointer;
+  transform: translateY(-50%);
+}
+.header .save  button { padding: 5%; width: 100%; }
+
+
+.header h4 {
+  height: 20px;
+  font-style: italic;
+  font-size: 1.5em;
+}
+
+/* Form Styles */
+
+.recipe-form {
+  padding: 1%;
+}
+
+.form-group input {
+  display: inline-block;
+  padding: 1%;
+  width: 70%;
+  font-size: 1em;
+}
+
+.form-group label {
+  display: inline-block;
+  width: 13%;
+  margin: 0;
+  vertical-align: middle;
+}
+
+ .about, #ingredients {
+  margin: 3% 0;
+  padding:2%;
+  border: 1px solid #FDFDFE;
+  border-radius: 10px;
+  box-shadow: 0px 0px 6px #999;
+}
+
+/* Ingredient Styles */
+#ingredients h3 {
+  display: inline-block;
+}
+
+.ingredient-list {
+  width: 95%;
+  padding: 1%;
+  margin: 2% auto;
+  display: inline-block;
+  border: solid 1px #d9d9d9;
+  background: #F5F5EF;
+  box-shadow: 0 0 5px #e0e0e0;
+  border-radius: 10px;
+}
+
+.ingredient-item {
+  background: white;
+  padding: 2%;
+  margin: 2% 0;
+}
+
+.ingredient-form {
+  margin-top: 2%;
+}
+
+.amount {
+  display: inline-block;
+  margin-right: 5%;
+}
+
+.ingredient-item h4 {
+  display: inline-block;
+  font-weight: 300;
+  font-size: 1.25em;
+}
+
+.ingredient-item input {
+  width: 30px;
+  height: 20px;
+  padding: 5px;
+  margin: 0 5px;
+}
+
+/* Add Ingredient Link */
+.add-ingredient {
+  color: #325f86;
+  display: inline-block;
+  float: right;
+  text-transform: capitalize;
+  font-weight: bold;
+  cursor: pointer;  
+}
+.add-ingredient:hover a {
+  text-decoration: underline;
+}
+.add-ingredient i {
+  display: inline-block;
+  margin-right: 10px;
+}
+
+/* Ingredient Library */
+
+  .library .search {
+    padding: 2%;
+    width: 90%;
+    margin: 0 auto;
+  }
+
+  .search input {
+    width: 100%;
+    height: 20px;
+    padding: 10px;
+    font-size: 1.2em;
+    font-weight: bold;
+  }
+
+  .library-head {
+     background: #f5f5f0;
+     font-size: 2em;
+  }
+  .library-items { 
+    max-height: 500px;
+    overflow: scroll;
+  }
+
+  .item { cursor: pointer;}
+  .add { 
+    width:7.5%;
+    display: inline-block;
+    text-align: center;
+    border-right: 4px solid #f5f5f0;
+    padding: 1% 0;
+    font-size: 1.5em;
+    color: #b55002;
+  }
+
+  .name {
+    display: inline-block;
+    width: 90%;
+    font-size: 1.2em;
+    font-weight: bold;
+    padding: 1%;
+  }
+  /* Saved Recipe */
+` 
+  .new-recipe {
+    margin: 2% 0px;
+    padding: 2%;
+    clear: both;
+  }
+  .recipe-details {
+    padding: 2%;
+  }
+  
+  .new-recipe button {
+    color: #f5f5f0;
+    margin: 2%;
+    font-size: 1em;
+  }
+
+  .new-recipe button:hover  {
+    box-shadow: 0 0 10px #666;
+  }
+
+/* Mobile Media Queries */ 
+
+@media (max-width: 800px) {
+  .left, .right { display: block; width: 100%;}
+  .save button.warning { font-size: 1em;}
+}

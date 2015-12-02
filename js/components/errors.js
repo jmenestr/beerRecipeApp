@@ -4,10 +4,10 @@ var React = require('react');
 module.exports = Errors = React.createClass({
 
   _renderErrors: function() {
+        // Generate errors list based on props.errors
     return (
       <div className='errors'>
         <ul>
-        // Generate errors list based on props.errors
           {this.props.errors.map(function(error){
             return (<li key={error}>{error}</li>);
           })}

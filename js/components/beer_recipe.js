@@ -36,7 +36,7 @@ module.exports = BeerRecipe = React.createClass({
               id='name'
               type='text' 
               valueLink={this.linkState('name')}
-              placeholder='Name your recipie' />
+              placeholder='Name your recipe' />
             </div>
             
             <div className='form-group'>
@@ -45,7 +45,7 @@ module.exports = BeerRecipe = React.createClass({
               id='style'
               type='text'
               valueLink={this.linkState('style')}
-              placeholder="Enter your recipie's style" />
+              placeholder="Enter your recipe's style" />
             </div>
             <div className='form-group'>
               <label htmlFor={'type'}>Type</label>
@@ -53,7 +53,7 @@ module.exports = BeerRecipe = React.createClass({
               id='type'
               type='text' 
               valueLink={this.linkState('type')}
-              placeholder="Enter your recipie's type" />
+              placeholder="Enter your recipe's type" />
             </div>
           </div>
 

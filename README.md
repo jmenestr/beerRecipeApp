@@ -2,7 +2,7 @@
 
 A simple React.js Beer making app utilizing Browserify
 
-## Use of Brosweify to bundle node modules 
+## Use of Browserify to bundle node modules 
 
 * Browserify allows the use of the Node.js require pattern for component and code modulerization 
 
